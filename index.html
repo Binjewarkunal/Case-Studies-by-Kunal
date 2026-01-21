@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunal Binjewar | Business Analyst Portfolio</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #3b82f6; /* Professional Blue */
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Custom Cursor */ }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--text-main);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--text-main);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@700&display=swap');
+
+        h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+        /* --- MOBILE WARNING (Overlay) --- */
+        #mobile-warning {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color);
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        #mobile-warning h2 { font-size: 2rem; color: var(--accent); margin-bottom: 10px; }
+        #mobile-warning p { color: var(--text-muted); max-width: 300px; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; }
+        .cta-btn {
+            padding: 10px 25px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .cta-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 20px var(--accent-glow); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            position: relative;
+            padding-top: 80px; /* Space for nav */
+        }
+        .hero-content { max-width: 550px; z-index: 2; }
+        .badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px; max-width: 450px; }
+        
+        /* --- NEW 3D PROFILE IMAGE STYLES --- */
+        .hero-image-wrapper {
+            perspective: 1000px; /* Creates 3D depth */
+            width: 100%;
+            max-width: 600px; /* Wider to fit screenshot */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-card {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            /* The 3D Tilt Logic */
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: all 0.5s ease-out;
+            box-shadow: -20px 20px 60px rgba(0,0,0,0.5), 
+                        0 0 20px rgba(59, 130, 246, 0.2); /* Soft Blue Glow */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #111;
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.95; /* Slight blend with dark theme */
+            transition: opacity 0.3s;
+        }
+
+        /* Hover Effect: Straighten card and glow harder */
+        .profile-card:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+            border-color: var(--accent);
+        }
+
+        .profile-card:hover img { opacity: 1; }
+
+
+        /* --- CASE STUDIES GRID --- */
+        .work-section { padding: 5rem 10%; }
+        .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
+        .section-title span { color: var(--accent); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .case-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .card-thumb {
+            width: 100%;
+            height: 220px;
+            background: #1e1e1e;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0.8;
+        }
+
+        .case-card:hover .card-thumb img { transform: scale(1.05); opacity: 1; }
+
+        .card-content { padding: 25px; }
+        .tag { color: var(--accent); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; display: block;}
+        .card-title { font-size: 1.5rem; margin-bottom: 15px; color: white; }
+        .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+        .view-btn span { margin-right: 8px; font-size: 1.2rem; }
+        .view-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 4rem;
+        }
+        .contact-email {
+            font-size: 2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: 0.3s;
+            font-family: var(--font-display);
+        }
+        .contact-email:hover { color: var(--accent); }
+
+        /* --- RESPONSIVE LOGIC --- */
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-content { margin-bottom: 50px; }
+            .hero-image-wrapper { max-width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            #mobile-warning { display: flex; } /* Show warning on mobile */
+            .main-content { display: none; } /* Hide site on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mobile-warning">
+        <h2>⚠️ Desktop Only</h2>
+        <p>This portfolio contains detailed analytical documents tailored for large screens.</p>
+        <br>
+        <p style="color:white; border: 1px solid #333; padding: 10px; border-radius: 8px;">Please open on Laptop/PC</p>
+    </div>
+
+    <div class="main-content">
+        
+        <div class="cursor"></div>
+        <div class="cursor-dot"></div>
+
+        <nav>
+            <div class="logo">Kunal Binjewar<span style="color:var(--accent)">.</span></div>
+            <a href="https://linkedin.com/in/YOUR_LINKEDIN_ID" target="_blank" class="cta-btn">LinkedIn Profile</a>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Business Analyst & Consultant</span>
+                <h1>Data Driven.<br>Strategy Focused.</h1>
+                <p>I transform complex data into actionable business strategies. Specializing in market research, consulting, and narrative-driven analysis.</p>
+                <div style="display: flex; gap: 15px; justify-content: center;"> 
+                    <a href="#work" class="cta-btn" style="background: white; color: black; border: none;">View Case Studies</a>
+                    <a href="mailto:binjewarkunal@gmail.com" class="cta-btn">Contact Me</a>
+                </div>
+            </div>
+            
+            <div class="hero-image-wrapper">
+                <div class="profile-card">
+                    <img src="Screenshot 2026-01-21 201556.png" alt="Kunal Binjewar LinkedIn Profile">
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="work-section">
+            <h2 class="section-title">Selected <span>Case Studies</span></h2>
+            
+            <div class="grid">
+                
+                <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="ilovepdf-thumb.png" alt="iLovePDF Analysis">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">SaaS / UX Strategy</span>
+                        <h3 class="card-title">iLovePDF: The Frictionless UX</h3>
+                        <p class="card-desc">Analyzing how a simple "zero-friction" interface built a global SaaS giant without heavy marketing.</p>
+                        <a href="docs/iLovePDF_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="tupperware-thumb.png" alt="Tupperware Analysis">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">Market Failure Analysis</span>
+                        <h3 class="card-title">The Collapse of Tupperware</h3>
+                        <p class="card-desc">Decoding the strategic rigidity and digital resistance that led to the fall of a kitchen icon.</p>
+                        <a href="docs/Tupperware_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="zerodha-thumb.png" alt="Zerodha Analysis">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">FinTech / Disruption</span>
+                        <h3 class="card-title">The Zerodha Phenomenon</h3>
+                        <p class="card-desc">How a bootstrapped startup used a "Low Cost" model to disrupt the Indian brokerage industry.</p>
+                        <a href="docs/Zerodha_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="thinkraw-thumb.png" alt="Think Raw Analysis">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">Supply Chain / Sustainability</span>
+                        <h3 class="card-title">Think Raw: Waste to Wealth</h3>
+                        <p class="card-desc">Operational analysis of converting agricultural waste into a scalable supply chain for Indian Railways.</p>
+                        <a href="docs/ThinkRaw_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="pulse-thumb.png" alt="Pulse Tax Analysis">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">Geopolitics / Economics</span>
+                        <h3 class="card-title">India's Pulse Tax Strategy</h3>
+                        <p class="card-desc">A deep dive into trade diplomacy and the economic impact of import duties on US agriculture.</p>
+                        <a href="docs/PulseTax_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                 <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="talent-thumb.png" alt="Talent Acquisition">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">HR Analytics / HFT</span>
+                        <h3 class="card-title">Economics of Elite Talent</h3>
+                        <p class="card-desc">Why firms like Optiver pay ₹2.5 Cr packages? Analyzing the ROI of high-frequency trading talent.</p>
+                        <a href="docs/EliteTalent_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                 <div class="case-card">
+                    <div class="card-thumb">
+                        <img src="journalism-thumb.png" alt="Journalism Analysis">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">Socio-Political Risk</span>
+                        <h3 class="card-title">Erosion of the Fourth Pillar</h3>
+                        <p class="card-desc">Risk assessment of institutional integrity and the developmental cost of silencing feedback loops.</p>
+                        <a href="docs/Journalism_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p style="color:var(--text-muted); margin-bottom:10px;">Interested in collaboration?</p>
+            <a href="mailto:binjewarkunal@gmail.com" class="contact-email">binjewarkunal@gmail.com</a>
+            <br><br>
+            <p style="font-size: 0.8rem; color: #333;">© 2026 Kunal Binjewar. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        // Hover Effect on Links to enlarge cursor
+        document.querySelectorAll('a, button, .profile-card').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.borderColor = '#3b82f6';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderColor = 'white';
+            });
+        });
+
+        // Mobile Warning Check
+        function checkMobile() {
+            if(window.innerWidth < 768) {
+                document.getElementById('mobile-warning').style.display = 'flex';
+                document.querySelector('.main-content').style.display = 'none';
+            } else {
+                document.getElementById('mobile-warning').style.display = 'none';
+                document.querySelector('.main-content').style.display = 'block';
+            }
+        }
+        
+        window.onload = checkMobile;
+        window.onresize = checkMobile;
+    </script>
+</body>
+</html>
