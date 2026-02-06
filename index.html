@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunal Binjewar | Business Analyst Portfolio</title>
+    <title>Kunal Binjewar | Strategy Consultant & Business Analyst</title>
     <style>
-        /* --- CSS VARIABLES & RESET --- */
         :root {
             --bg-color: #0a0a0a;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -28,7 +27,6 @@
             cursor: none; 
         }
 
-        /* --- CUSTOM CURSOR (Desktop Only) --- */
         .cursor {
             width: 20px;
             height: 20px;
@@ -54,7 +52,6 @@
 
         h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
 
-        /* --- DOCUMENT WARNING MODAL (Mobile Smart Lock) --- */
         #doc-warning-modal {
             display: none;
             position: fixed;
@@ -67,7 +64,6 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            animation: fadeIn 0.3s ease;
         }
         
         .modal-content {
@@ -90,12 +86,6 @@
             cursor: pointer;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* --- NAVIGATION --- */
         nav {
             display: flex;
             justify-content: space-between;
@@ -121,7 +111,6 @@
         }
         .cta-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -153,7 +142,6 @@
         }
         .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px; max-width: 450px; }
         
-        /* 3D PROFILE CARD */
         .hero-image-wrapper {
             perspective: 1000px;
             width: 100%;
@@ -174,7 +162,7 @@
             background: #111;
         }
 
-        .profile-card img { width: 100%; height: auto; display: block; transition: opacity 0.3s; }
+        .profile-card img { width: 100%; height: auto; display: block; }
 
         .profile-card:hover {
             transform: rotateY(0deg) rotateX(0deg) scale(1.02);
@@ -182,7 +170,6 @@
             border-color: var(--accent);
         }
 
-        /* --- GRID --- */
         .work-section { padding: 5rem 10%; }
         .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
         .section-title span { color: var(--accent); }
@@ -228,12 +215,10 @@
         }
         .view-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-        /* --- FOOTER --- */
         footer { text-align: center; padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem; }
         .contact-email { font-size: 2rem; color: var(--text-main); text-decoration: none; transition: 0.3s; font-family: var(--font-display); }
         .contact-email:hover { color: var(--accent); }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .hero { flex-direction: column; text-align: center; padding-top: 120px; }
             .hero-content { margin-bottom: 50px; }
@@ -279,41 +264,22 @@
             
             <div class="hero-image-wrapper">
                 <div class="profile-card">
-                    <img src="linkedin-profile.png" alt="LinkedIn Profile">
+                    <img src="Screenshot 2026-01-21 201556.png" alt="LinkedIn Profile">
                 </div>
             </div>
         </section>
 
-                        <div class="case-card">
+        <section id="work" class="work-section">
+            <h2 class="section-title">Case Study <span>Portfolio</span></h2>
+            <div class="grid">
+                
+                <div class="case-card">
                     <div class="card-thumb"><img src="gold-silver-thumb.png" alt="Gold-Silver Crash"></div>
                     <div class="card-content">
-                        <span class="tag">Finance / Market Analysis</span>
+                        <span class="tag">Finance / Market Correction</span>
                         <h3 class="card-title">The Precious Metals 'Detox'</h3>
-                        <p class="card-desc">Analyzing the Jan 2025 historic correction in Silver (-17%) and Gold (-9%)[cite: 1, 3].</p>
+                        <p class="card-desc">Analyzing the historic Jan 2025 crash: A market detox or a well-laid dollar trap? </p>
                         <a href="docs/GoldSilver_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
-                    </div>
-                </div>
-                
-        <section id="work" class="work-section">
-            <h2 class="section-title">Selected <span>Case Studies</span></h2>
-            <div class="grid">
-                <div class="case-card">
-                    <div class="card-thumb"><img src="ilovepdf-thumb.png" alt="iLovePDF"></div>
-                    <div class="card-content">
-                        <span class="tag">SaaS / UX Strategy</span>
-                        <h3 class="card-title">iLovePDF: The Frictionless UX</h3>
-                        <p class="card-desc">Analyzing how a simple "zero-friction" interface built a global SaaS giant.</p>
-                        <a href="docs/iLovePDF_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="card-thumb"><img src="tupperware-thumb.png" alt="Tupperware"></div>
-                    <div class="card-content">
-                        <span class="tag">Market Failure</span>
-                        <h3 class="card-title">The Collapse of Tupperware</h3>
-                        <p class="card-desc">Decoding the strategic rigidity that led to the fall of a kitchen icon.</p>
-                        <a href="docs/Tupperware_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
@@ -322,65 +288,85 @@
                     <div class="card-content">
                         <span class="tag">FinTech / Disruption</span>
                         <h3 class="card-title">The Zerodha Phenomenon</h3>
-                        <p class="card-desc">How a bootstrapped startup disrupted the Indian brokerage industry.</p>
+                        <p class="card-desc">How a bootstrapped unicorn used zero marketing spend to disrupt India's brokerage sector.</p>
                         <a href="docs/Zerodha_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="card-thumb"><img src="thinkraw-thumb.png" alt="Think Raw"></div>
-                    <div class="card-content">
-                        <span class="tag">Sustainability</span>
-                        <h3 class="card-title">Think Raw: Waste to Wealth</h3>
-                        <p class="card-desc">Converting agricultural waste into a scalable supply chain for Railways[cite: 25, 28].</p>
-                        <a href="docs/ThinkRaw_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="card-thumb"><img src="pulse-thumb.png" alt="Pulse Tax"></div>
-                    <div class="card-content">
-                        <span class="tag">Geopolitics</span>
-                        <h3 class="card-title">India's Pulse Tax Strategy</h3>
-                        <p class="card-desc">A deep dive into trade diplomacy and impact on US agriculture.</p>
-                        <a href="docs/PulseTax_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="card-thumb"><img src="talent-thumb.png" alt="Talent"></div>
-                    <div class="card-content">
-                        <span class="tag">HR Analytics</span>
-                        <h3 class="card-title">Economics of Elite Talent</h3>
-                        <p class="card-desc">Analyzing the ROI of ₹2.5 Cr packages in High-Frequency Trading.</p>
-                        <a href="docs/EliteTalent_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="card-thumb"><img src="journalism-thumb.png" alt="Journalism"></div>
-                    <div class="card-content">
-                        <span class="tag">Risk Analysis</span>
-                        <h3 class="card-title">Erosion of the Fourth Pillar</h3>
-                        <p class="card-desc">Risk assessment of institutional integrity and systemic feedback loops.</p>
-                        <a href="docs/Journalism_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
                 <div class="case-card">
                     <div class="card-thumb"><img src="Maggi-thumb.png" alt="Mountain Maggi"></div>
                     <div class="card-content">
-                        <span class="tag">Retail Economics</span>
-                        <h3 class="card-title">High-Altitude Retail Analysis</h3>
-                        <p class="card-desc">Analyzing "Pahadon Wali Maggi": Markup, price inelasticity, and logistics[cite: 25, 28].</p>
+                        <span class="tag">Psychology / Economics</span>
+                        <h3 class="card-title">High-Altitude Retail Strategy</h3>
+                        <p class="card-desc">Analyzing price inelasticity and survival branding in mountain-based retail models. [cite: 25, 37]</p>
                         <a href="docs/MountainMaggi_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="talent-thumb.png" alt="Talent"></div>
+                    <div class="card-content">
+                        <span class="tag">HR Analytics / ROI</span>
+                        <h3 class="card-title">The Economics of Elite Talent</h3>
+                        <p class="card-desc">Analyzing the ₹2.5 Cr valuation: Why HFT firms pay a premium for top 1% algorithmic talent.</p>
+                        <a href="docs/EliteTalent_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="ilovepdf-thumb.png" alt="iLovePDF"></div>
+                    <div class="card-content">
+                        <span class="tag">SaaS / UX Strategy</span>
+                        <h3 class="card-title">iLovePDF: Zero-Friction UX</h3>
+                        <p class="card-desc">How a simple micro-problem solution captured millions of monthly active users globally.</p>
+                        <a href="docs/iLovePDF_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="thinkraw-thumb.png" alt="Think Raw"></div>
+                    <div class="card-content">
+                        <span class="tag">Operational Resilience</span>
+                        <h3 class="card-title">Think Raw: Waste to Wealth</h3>
+                        <p class="card-desc">Operational analysis of Bihar's corn-husk innovation for Indian Railways. </p>
+                        <a href="docs/ThinkRaw_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="tupperware-thumb.png" alt="Tupperware"></div>
+                    <div class="card-content">
+                        <span class="tag">Management Failure</span>
+                        <h3 class="card-title">The Tupperware Relevance Trap</h3>
+                        <p class="card-desc">Analyzing how channel conflict and digital resistance collapsed a kitchen legacy brand. </p>
+                        <a href="docs/Tupperware_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="pulse-thumb.png" alt="Pulse Tax"></div>
+                    <div class="card-content">
+                        <span class="tag">Trade Diplomacy</span>
+                        <h3 class="card-title">India's Trade Diplomacy shield</h3>
+                        <p class="card-desc">A strategic analysis of tit-for-tat import duties and protectionist economics. </p>
+                        <a href="docs/PulseTax_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="journalism-thumb.png" alt="Journalism"></div>
+                    <div class="card-content">
+                        <span class="tag">Institutional Risk</span>
+                        <h3 class="card-title">Erosion of the Fourth Pillar</h3>
+                        <p class="card-desc">Analyzing the systemic developmental cost of silencing accountability in emerging economies. </p>
+                        <a href="docs/Journalism_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <footer>
-            <p style="color:var(--text-muted); margin-bottom:10px;">Interested in collaboration?</p>
+            <p style="color:var(--text-muted); margin-bottom:10px;">Strategic Consulting | Business Analysis</p>
             <a href="mailto:binjewarkunal@gmail.com" class="contact-email">binjewarkunal@gmail.com</a>
             <p style="font-size: 0.8rem; color: #333; margin-top: 20px;">© 2026 Kunal Binjewar. All Rights Reserved.</p>
         </footer>
@@ -424,9 +410,7 @@
             });
         });
 
-        function closeModal() {
-            warningModal.style.display = 'none';
-        }
+        function closeModal() { warningModal.style.display = 'none'; }
     </script>
 </body>
 </html>
