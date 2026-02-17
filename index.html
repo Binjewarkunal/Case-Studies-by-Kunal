@@ -3,384 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunal Binjewar | Independent Strategist & Case Study Hub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
-    
+    <title>Kunal Binjewar | Strategy Consultant & Business Analyst</title>
     <style>
         :root {
-            --bg: #050505;
-            --card: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #ffffff;
-            --text-dim: #94a3b8;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.3);
-            --radius: 28px;
+            --bg-color: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #3b82f6; 
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Outfit', sans-serif;
         }
 
-        [data-theme="light"] {
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --border: rgba(0, 0, 0, 0.06);
-            --text: #0f172a;
-            --text-dim: #64748b;
-            --accent: #2563eb;
-            --accent-glow: rgba(37, 99, 235, 0.1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background 0.3s ease; /* Faster transition */
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
             overflow-x: hidden;
             line-height: 1.6;
+            cursor: none; 
         }
 
-        /* --- OPTIMIZED LOADER --- */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease; /* Faster fade */
+        .cursor {
+            width: 20px; height: 20px; border: 1px solid var(--text-main);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transition: transform 0.1s; mix-blend-mode: difference;
         }
-        .loader-bar { width: 150px; height: 2px; background: #222; position: relative; overflow: hidden; }
-        .loader-bar::after { content: ''; position: absolute; left: -100%; width: 100%; height: 100%; background: var(--accent); animation: loading 1s infinite; }
-        @keyframes loading { 100% { left: 100%; } }
+        .cursor-dot {
+            width: 4px; height: 4px; background: var(--text-main);
+            border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
+        }
 
-        /* --- NAVIGATION --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@700&display=swap');
+
+        h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+        #doc-warning-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); z-index: 10000;
+            flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
+        }
+        
+        .modal-content {
+            background: #111; border: 1px solid var(--accent); padding: 30px;
+            border-radius: 20px; max-width: 90%; box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .close-modal-btn {
+            margin-top: 20px; padding: 10px 30px; background: var(--accent);
+            color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
+        }
+
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: clamp(1rem, 3vw, 2rem) 8%;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(var(--bg), 0.85); backdrop-filter: blur(12px); /* Optimized Blur */
-            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 5%; position: fixed; width: 100%; top: 0;
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);
+            z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: -1px; }
+        .logo { font-size: 1.5rem; font-weight: 700; }
+        .cta-btn {
+            padding: 10px 25px; border: 1px solid var(--accent); color: var(--accent);
+            text-decoration: none; border-radius: 50px; font-size: 0.9rem; transition: 0.3s;
+        }
+        .cta-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* --- HERO SECTION --- */
         .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            padding: 140px 8% 80px; text-align: center;
-            background: radial-gradient(circle at top right, var(--accent-glow), transparent 40%);
-            contain: content; /* Performance Boost */
+            min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 10%; position: relative; padding-top: 80px; 
         }
-        .hero-content { max-width: 1000px; }
-        .stat-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--accent-glow); color: var(--accent);
-            padding: 10px 24px; border-radius: 100px; font-weight: 800;
-            font-size: 0.8rem; border: 1px solid var(--accent); margin-bottom: 32px;
-            text-transform: uppercase; letter-spacing: 1px;
+        .hero-content { max-width: 550px; z-index: 2; }
+        .badge {
+            background: rgba(59, 130, 246, 0.1); color: var(--accent);
+            padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block;
         }
         .hero h1 {
-            font-family: 'Outfit', sans-serif; font-size: clamp(2.8rem, 9vw, 6.5rem);
-            line-height: 0.95; font-weight: 900; margin-bottom: 30px;
-            letter-spacing: -2px; will-change: transform;
+            font-size: 4rem; line-height: 1.1; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px; max-width: 450px; }
+        
+        .hero-image-wrapper {
+            perspective: 1000px; width: 100%; max-width: 600px;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* --- 3D PROFILE (Optimized) --- */
-        .hero-image-wrapper { margin-top: 40px; perspective: 1000px; display: flex; justify-content: center; }
         .profile-card {
-            width: 100%; max-width: 400px; border-radius: 20px; overflow: hidden;
-            transform: rotateY(-5deg) rotateX(5deg); transition: transform 0.3s ease;
-            box-shadow: -10px 10px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%; border-radius: 15px; overflow: hidden;
+            transform: rotateY(-10deg) rotateX(5deg); transition: all 0.5s ease-out;
+            box-shadow: -20px 20px 60px rgba(0,0,0,0.5), 0 0 20px rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1); background: #111;
         }
-        .profile-card:hover { transform: rotateY(0deg) rotateX(0deg); }
         .profile-card img { width: 100%; height: auto; display: block; }
+        .profile-card:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); border-color: var(--accent);
+        }
 
-        /* --- CASE STUDY HUB --- */
-        .section { padding: 100px 8%; contain: content; }
-        .section-title { font-family: 'Outfit'; font-size: clamp(2.2rem, 5vw, 4rem); margin-bottom: 60px; text-align: center; letter-spacing: -2px; }
+        .work-section { padding: 5rem 10%; }
+        .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
         .section-title span { color: var(--accent); }
 
-        .case-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
         }
 
         .case-card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--radius); overflow: hidden;
-            text-decoration: none; color: inherit; display: flex; flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform;
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; overflow: hidden; transition: all 0.4s ease;
+        }
+        .case-card:hover {
+            transform: translateY(-10px); border-color: var(--accent);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
         }
 
-        .case-card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
+        .card-thumb { width: 100%; height: 200px; background: #1e1e1e; overflow: hidden; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 0.5s ease; }
+        .case-card:hover .card-thumb img { transform: scale(1.05); opacity: 1; }
 
-        /* Image Placeholder to prevent layout shift */
-        .card-thumb { 
-            width: 100%; height: 220px; background: #111; position: relative; overflow: hidden;
+        .card-content { padding: 25px; }
+        .tag { color: var(--accent); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; display: block;}
+        .card-title { font-size: 1.35rem; margin-bottom: 15px; color: white; }
+        .card-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+
+        .view-btn {
+            display: inline-flex; align-items: center; color: white;
+            text-decoration: none; font-weight: 600; font-size: 0.85rem;
+            transition: 0.3s; border-bottom: 1px solid transparent; cursor: pointer;
         }
-        .card-thumb img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: transform 0.5s ease; opacity: 0; animation: fadeInImg 0.5s forwards;
+        .view-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+        footer { text-align: center; padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem; }
+        .contact-email { font-size: 2rem; color: var(--text-main); text-decoration: none; transition: 0.3s; font-family: var(--font-display); }
+        .contact-email:hover { color: var(--accent); }
+
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-content { margin-bottom: 50px; }
         }
-        
-        @keyframes fadeInImg { to { opacity: 1; } }
-
-        .case-card:hover .card-thumb img { transform: scale(1.05); }
-
-        .card-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
-        .tag { font-weight: 800; font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        .case-card h3 { font-family: 'Outfit'; font-size: 1.5rem; margin-bottom: 12px; line-height: 1.2; }
-        .case-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; margin-bottom: 20px; }
-        .view-link { font-weight: 700; font-size: 0.9rem; color: var(--accent); display: flex; align-items: center; gap: 5px; }
-
-        /* --- PRICING --- */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-        .price-card {
-            background: var(--card); border: 1px solid var(--border);
-            padding: 40px; border-radius: var(--radius); transition: 0.3s;
-        }
-        .price-card.featured { border: 1px solid var(--accent); background: rgba(59, 130, 246, 0.03); }
-        .price-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-family: 'Outfit'; }
-        .price-card .cost { font-size: 2.5rem; font-weight: 900; margin: 20px 0; font-family: 'Outfit'; }
-        .price-card .cost span { font-size: 1rem; color: var(--text-dim); font-weight: 400; font-family: 'Plus Jakarta Sans'; }
-
-        /* --- BUTTONS --- */
-        .btn { padding: 14px 30px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: 0.2s; text-align: center; font-size: 0.95rem; cursor: pointer; }
-        .btn-primary { background: var(--accent); color: white; border: none; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px var(--accent-glow); }
-        .btn-outline { border: 1px solid var(--border); color: var(--text); }
-        .btn-outline:hover { background: var(--text); color: var(--bg); }
-
-        /* --- MODAL --- */
-        #doc-warning {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 9999;
-            justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-box { background: #111; border: 1px solid var(--accent); padding: 40px; border-radius: 24px; text-align: center; max-width: 400px; }
 
         @media (max-width: 768px) {
-            .section { padding: 80px 5%; }
-            .hero h1 { letter-spacing: -1px; }
-            .case-grid { grid-template-columns: 1fr; }
+            .cursor, .cursor-dot { display: none !important; }
+            body { cursor: auto !important; }
+            .hero h1 { font-size: 2.8rem; }
+            .contact-email { font-size: 1.2rem; }
         }
-
-        footer { padding: 80px 8%; text-align: center; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
-    <div id="loader"><div class="loader-bar"></div></div>
-
-    <div id="doc-warning">
-        <div class="modal-box">
-            <h2 style="color:var(--accent); margin-bottom: 15px; font-family: 'Outfit';">Desktop Recommended</h2>
-            <p style="color:var(--text-dim); margin-bottom: 25px; font-size: 0.9rem;">This analysis contains strategic frameworks best viewed on a larger screen.</p>
-            <button class="btn btn-primary" onclick="closeModal()">Continue anyway</button>
+    <div id="doc-warning-modal">
+        <div class="modal-content">
+            <h2 style="color:var(--accent); font-size: 1.8rem; margin-bottom: 15px;">⚠️ Switch to Desktop</h2>
+            <p style="color:var(--text-muted); margin-bottom: 20px;">This deep-dive analysis contains complex data visualizations best viewed on a larger screen.</p>
+            <button class="close-modal-btn" onclick="closeModal()">I'll check on PC</button>
         </div>
     </div>
 
-    <nav>
-        <div class="logo">KUNAL BINJEWAR.</div>
-        <a href="mailto:binjewarkunal@gmail.com" class="btn-outline btn" style="padding: 10px 20px; font-size: 0.8rem;">Let's Talk</a>
-    </nav>
+    <div class="main-content">
+        <div class="cursor"></div>
+        <div class="cursor-dot"></div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="stat-badge">🚀 3M+ Impressions Proof on LinkedIn</div>
-            <h1>Strategy.<br>Logic.<br><span style="color:var(--accent)">Destiny.</span></h1>
-            <p>Independent Strategist & Consultant. I build resilient business frameworks and high-authority personal brands.</p>
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
-                <a href="#portfolio" class="btn btn-primary">Analysis Hub</a>
-                <a href="#services" class="btn btn-outline">My Services</a>
+        <nav>
+            <div class="logo">Kunal Binjewar<span style="color:var(--accent)">.</span></div>
+            <a href="https://linkedin.com/in/kunalbinjewar" target="_blank" class="cta-btn">LinkedIn Profile</a>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Business Analyst & Consultant</span>
+                <h1>Data Driven.<br>Strategy Focused.</h1>
+                <p>I transform complex data into actionable business strategies. Specializing in market research, consulting, and narrative-driven analysis.</p>
+                <div style="display: flex; gap: 15px; justify-content: center;"> 
+                    <a href="#work" class="cta-btn" style="background: white; color: black; border: none;">View Case Studies</a>
+                    <a href="mailto:binjewarkunal@gmail.com" class="cta-btn">Contact Me</a>
+                </div>
             </div>
             
             <div class="hero-image-wrapper">
                 <div class="profile-card">
-                    <img src="linkedin-profile.png" alt="LinkedIn Profile" fetchpriority="high">
+                    <img src="Screenshot 2026-01-21 201556.png" alt="LinkedIn Profile">
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section" id="portfolio">
-        <h2 class="section-title">Strategic <span>Analysis Hub</span></h2>
-        <div class="case-grid">
-            <a href="docs/IndiaAI_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="india-ai-thumb.png" alt="India AI Summit 2026" loading="eager">
+        <section id="work" class="work-section">
+            <h2 class="section-title">Case Study <span>Portfolio</span></h2>
+            <div class="grid">
+                
+                <div class="case-card">
+                    <div class="card-thumb"><img src="india-ai-thumb.png" alt="India AI Summit 2026"></div>
+                    <div class="card-content">
+                        <span class="tag">Trending / Geopolitics</span>
+                        <h3 class="card-title">India-AI Summit 2026: The Deployment Shift</h3>
+                        <p class="card-desc">Analyzing the global shift from Regulation (EU) to Scale (India). Why NVIDIA & OpenAI are betting on India.</p>
+                        <a href="CASE STUDY India-AI Impact Summit 2026.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="tag">Trending / Geopolitics</span>
-                    <h3>India-AI Summit 2026</h3>
-                    <p>Analyzing the shift from "Regulatory Containment" to "Deployment at Scale." Why NVIDIA & OpenAI are betting on India.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
 
-            <a href="docs/GoldSilver_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="gold-silver-thumb.png" alt="Gold Silver Crash" loading="lazy" decoding="async">
+                <div class="case-card">
+                    <div class="card-thumb"><img src="gold-silver-thumb.png" alt="Gold-Silver Crash"></div>
+                    <div class="card-content">
+                        <span class="tag">Finance / Market Correction</span>
+                        <h3 class="card-title">The Precious Metals 'Detox'</h3>
+                        <p class="card-desc">Analyzing the historic Jan 2025 crash: A market detox or a well-laid dollar trap? </p>
+                        <a href="docs/GoldSilver_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="tag">Finance</span>
-                    <h3>Precious Metals 'Detox'</h3>
-                    <p>Analyzing the 17% market crash: Market failure or a strategic dollar trap?</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
 
-            <a href="docs/Zerodha_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="zerodha-thumb.png" alt="Zerodha Analysis" loading="lazy" decoding="async">
+                <div class="case-card">
+                    <div class="card-thumb"><img src="zerodha-thumb.png" alt="Zerodha"></div>
+                    <div class="card-content">
+                        <span class="tag">FinTech / Disruption</span>
+                        <h3 class="card-title">The Zerodha Phenomenon</h3>
+                        <p class="card-desc">How a bootstrapped unicorn used zero marketing spend to disrupt India's brokerage sector.</p>
+                        <a href="docs/Zerodha_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="tag">FinTech</span>
-                    <h3>The Zerodha Phenomenon</h3>
-                    <p>Decoding the bootstrapped unicorn that won without a marketing budget.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
 
-            <a href="docs/MountainMaggi_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="maggi-mountain-thumb.png" alt="Maggi Economics" loading="lazy" decoding="async">
+                <div class="case-card">
+                    <div class="card-thumb"><img src="Maggi-thumb.png" alt="Mountain Maggi"></div>
+                    <div class="card-content">
+                        <span class="tag">Psychology / Economics</span>
+                        <h3 class="card-title">High-Altitude Retail Strategy</h3>
+                        <p class="card-desc">Analyzing price inelasticity and survival branding in mountain-based retail models.</p>
+                        <a href="docs/MountainMaggi_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="tag">Psychology</span>
-                    <h3>Mountain Maggi Economics</h3>
-                    <p>Why people pay 500% markups at 12,000 feet: A study on price inelasticity.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
 
-            <a href="docs/EliteTalent_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="talent-thumb.png" alt="Talent Economics" loading="lazy" decoding="async">
+                <div class="case-card">
+                    <div class="card-thumb"><img src="talent-thumb.png" alt="Talent"></div>
+                    <div class="card-content">
+                        <span class="tag">HR Analytics / ROI</span>
+                        <h3 class="card-title">The Economics of Elite Talent</h3>
+                        <p class="card-desc">Analyzing the ₹2.5 Cr valuation: Why HFT firms pay a premium for top 1% algorithmic talent.</p>
+                        <a href="docs/EliteTalent_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="tag">HR Analytics</span>
-                    <h3>Economics of Elite Talent</h3>
-                    <p>Why HFT firms pay ₹2.5 Cr packages for the top 1% of algorithmic talent.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
 
-            <a href="docs/iLovePDF_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="ilovepdf-thumb.png" alt="iLovePDF SaaS" loading="lazy" decoding="async">
+                <div class="case-card">
+                    <div class="card-thumb"><img src="ilovepdf-thumb.png" alt="iLovePDF"></div>
+                    <div class="card-content">
+                        <span class="tag">SaaS / UX Strategy</span>
+                        <h3 class="card-title">iLovePDF: Zero-Friction UX</h3>
+                        <p class="card-desc">How a simple micro-problem solution captured millions of monthly active users globally.</p>
+                        <a href="docs/iLovePDF_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="tag">SaaS / UX</span>
-                    <h3>iLovePDF: Zero-Friction</h3>
-                    <p>How a simple micro-problem solution captured millions of monthly active users.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
-             <a href="docs/ThinkRaw_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="thinkraw-thumb.png" alt="Think Raw" loading="lazy" decoding="async">
-                </div>
-                <div class="card-content">
-                    <span class="tag">Supply Chain</span>
-                    <h3>Think Raw: Waste to Wealth</h3>
-                    <p>Operational analysis of Bihar's corn-husk innovation for Indian Railways.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
-             <a href="docs/Tupperware_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="tupperware-thumb.png" alt="Tupperware" loading="lazy" decoding="async">
-                </div>
-                <div class="card-content">
-                    <span class="tag">Management</span>
-                    <h3>The Tupperware Collapse</h3>
-                    <p>Decoding the relevance failure and strategic rigidity of a legacy kitchen brand.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
-             <a href="docs/PulseTax_CaseStudy.docx" class="case-card view-trigger">
-                <div class="card-thumb">
-                    <img src="pulse-thumb.png" alt="Pulse Tax" loading="lazy" decoding="async">
-                </div>
-                <div class="card-content">
-                    <span class="tag">Trade Diplomacy</span>
-                    <h3>India's Trade Diplomacy</h3>
-                    <p>A strategic analysis of tit-for-tat import duties and protectionist economics.</p>
-                    <div class="view-link">Read Analysis →</div>
-                </div>
-            </a>
-        </div>
-    </section>
 
-    <section class="section" id="services">
-        <h2 class="section-title">Independent <span>Services</span></h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Ghostwriting</h3>
-                <p>LinkedIn personal branding for CEOs. Turning domain expertise into viral authority.</p>
-                <div class="cost">₹18,000<span>/mo</span></div>
-                <a href="mailto:binjewarkunal@gmail.com" class="btn btn-outline" style="width: 100%;">Get Started</a>
+                <div class="case-card">
+                    <div class="card-thumb"><img src="thinkraw-thumb.png" alt="Think Raw"></div>
+                    <div class="card-content">
+                        <span class="tag">Operational Resilience</span>
+                        <h3 class="card-title">Think Raw: Waste to Wealth</h3>
+                        <p class="card-desc">Operational analysis of Bihar's corn-husk innovation for Indian Railways. </p>
+                        <a href="docs/ThinkRaw_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="tupperware-thumb.png" alt="Tupperware"></div>
+                    <div class="card-content">
+                        <span class="tag">Management Failure</span>
+                        <h3 class="card-title">The Tupperware Relevance Trap</h3>
+                        <p class="card-desc">Analyzing how channel conflict and digital resistance collapsed a kitchen legacy brand. </p>
+                        <a href="docs/Tupperware_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="pulse-thumb.png" alt="Pulse Tax"></div>
+                    <div class="card-content">
+                        <span class="tag">Trade Diplomacy</span>
+                        <h3 class="card-title">India's Trade Diplomacy shield</h3>
+                        <p class="card-desc">A strategic analysis of tit-for-tat import duties and protectionist economics. </p>
+                        <a href="docs/PulseTax_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="card-thumb"><img src="journalism-thumb.png" alt="Journalism"></div>
+                    <div class="card-content">
+                        <span class="tag">Institutional Risk</span>
+                        <h3 class="card-title">Erosion of the Fourth Pillar</h3>
+                        <p class="card-desc">Analyzing the systemic developmental cost of silencing accountability in emerging economies. </p>
+                        <a href="docs/Journalism_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
+                    </div>
+                </div>
             </div>
-            <div class="price-card featured">
-                <h3>Strategy Consulting</h3>
-                <p>Market research, competitor mapping, and growth strategy for early-stage startups.</p>
-                <div class="cost">₹7,500<span>/session</span></div>
-                <a href="mailto:binjewarkunal@gmail.com" class="btn btn-primary" style="width: 100%;">Book Strategy Call</a>
-            </div>
-            <div class="price-card">
-                <h3>AI Visual Assets</h3>
-                <p>High-fidelity logos, thumbnails, and cinematic visual assets generated via advanced AI prompts.</p>
-                <div class="cost">₹4,000<span>/project</span></div>
-                <a href="mailto:binjewarkunal@gmail.com" class="btn btn-outline" style="width: 100%;">Order Assets</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section">
-        <div style="background: var(--card); border: 1px solid var(--border); padding: clamp(40px, 8vw, 80px); border-radius: 40px; text-align: center;">
-            <h2 style="font-family: 'Outfit'; margin-bottom: 24px; font-size: clamp(1.5rem, 4vw, 3rem);">The Honest Truth.</h2>
-            <p style="color:var(--text-dim); max-width: 800px; margin: 0 auto 32px; font-size: 1.1rem;">
-                I chose to pivot from IT development to Business Strategy. I believe in logic, data storytelling, and the raw power of community building. No fake titles, just results.
-            </p>
-            <p style="font-weight: 800; color: var(--accent);">Status: Open for Full-time Roles, Collaborations, & Promotions.</p>
-        </div>
-    </section>
-
-    <footer>
-        <h2 style="font-family: 'Outfit'; font-size: 3rem; margin-bottom: 24px; letter-spacing: -2px;">Let's Build.</h2>
-        <a href="mailto:binjewarkunal@gmail.com" style="font-size: clamp(1.2rem, 5vw, 2.5rem); color: var(--accent); text-decoration: none; font-weight: 900; letter-spacing: -1px;">binjewarkunal@gmail.com</a>
-        <div style="margin-top: 60px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
-            <a href="https://linkedin.com/in/kunalbinjewar" style="color: var(--text-dim); text-decoration: none; font-weight: 700;">LinkedIn</a>
-            <a href="#" style="color: var(--text-dim); text-decoration: none; font-weight: 700;">Full Portfolio</a>
-        </div>
-        <p style="margin-top: 60px; font-size: 0.8rem; color: #333;">© 2026 Kunal Binjewar. Strategic Integrity by Design.</p>
-    </footer>
+        <footer>
+            <p style="color:var(--text-muted); margin-bottom:10px;">Strategic Consulting | Business Analysis</p>
+            <a href="mailto:binjewarkunal@gmail.com" class="contact-email">binjewarkunal@gmail.com</a>
+            <p style="font-size: 0.8rem; color: #333; margin-top: 20px;">© 2026 Kunal Binjewar. All Rights Reserved.</p>
+        </footer>
+    </div>
 
     <script>
-        // FAST LOADER Logic
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            // Immediate fade out
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 500);
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const warningModal = document.getElementById('doc-warning-modal');
+
+        document.addEventListener('mousemove', (e) => {
+            if(window.innerWidth > 768) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            }
         });
 
-        // Mobile warning logic
-        const modal = document.getElementById('doc-warning');
-        document.querySelectorAll('.view-trigger').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if(window.innerWidth < 1024) {
-                    e.preventDefault();
-                    modal.style.display = 'flex';
-                    window.pendingUrl = card.getAttribute('href');
+        document.querySelectorAll('a, button, .profile-card').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                if(window.innerWidth > 768) {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.borderColor = '#3b82f6';
+                }
+            });
+            item.addEventListener('mouseleave', () => {
+                if(window.innerWidth > 768) {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.borderColor = 'white';
                 }
             });
         });
 
-        function closeModal() {
-            modal.style.display = 'none';
-            if(window.pendingUrl) window.location.href = window.pendingUrl;
-        }
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if(window.innerWidth < 1024) {
+                    e.preventDefault();
+                    warningModal.style.display = 'flex';
+                }
+            });
+        });
+
+        function closeModal() { warningModal.style.display = 'none'; }
     </script>
 </body>
 </html>
