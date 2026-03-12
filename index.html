@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kunal Binjewar | Strategy Consultant & Business Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            /* DARK THEME (Default) */
+            --bg-color: #030303;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
-            --text-muted: #a1a1aa;
+            --text-muted: #94a3b8;
             --accent: #3b82f6; 
-            --accent-glow: rgba(59, 130, 246, 0.5);
-            --font-main: 'Inter', sans-serif;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
             --font-display: 'Outfit', sans-serif;
+            --radius: 24px;
+        }
+
+        [data-theme="light"] {
+            /* LIGHT THEME */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #2563eb; 
+            --accent-glow: rgba(37, 99, 235, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,8 +43,10 @@
             overflow-x: hidden;
             line-height: 1.6;
             cursor: none; 
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
+        /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 20px; height: 20px; border: 1px solid var(--text-main);
             border-radius: 50%; position: fixed; pointer-events: none;
@@ -37,131 +57,185 @@
             border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@700&display=swap');
-
         h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
 
+        /* --- MODAL --- */
         #doc-warning-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); z-index: 10000;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); z-index: 10000;
             flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 20px;
         }
         
         .modal-content {
-            background: #111; border: 1px solid var(--accent); padding: 30px;
-            border-radius: 20px; max-width: 90%; box-shadow: 0 0 30px var(--accent-glow);
+            background: var(--card-bg); border: 1px solid var(--accent); padding: 40px;
+            border-radius: var(--radius); max-width: 400px; box-shadow: 0 0 40px var(--accent-glow);
         }
 
         .close-modal-btn {
-            margin-top: 20px; padding: 10px 30px; background: var(--accent);
+            margin-top: 25px; padding: 12px 30px; background: var(--accent);
             color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
         }
 
+        /* --- NAVIGATION --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 5%; position: fixed; width: 100%; top: 0;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);
-            z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 1.5rem 8%; position: fixed; width: 100%; top: 0;
+            background: rgba(var(--bg-color), 0.8); backdrop-filter: blur(15px);
+            z-index: 100; border-bottom: 1px solid var(--border-color);
+            transition: 0.4s;
         }
-        .logo { font-size: 1.5rem; font-weight: 700; }
-        .cta-btn {
-            padding: 10px 25px; border: 1px solid var(--accent); color: var(--accent);
-            text-decoration: none; border-radius: 50px; font-size: 0.9rem; transition: 0.3s;
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; }
+        
+        .nav-actions { display: flex; gap: 15px; align-items: center; }
+        .theme-btn {
+            background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 8px 16px; border-radius: 50px; cursor: pointer; font-size: 0.8rem; font-weight: 600;
         }
-        .cta-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 20px var(--accent-glow); }
 
+        /* --- PREMIUM HERO SECTION --- */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 10%; position: relative; padding-top: 80px; 
+            padding: 120px 8% 60px; position: relative; gap: 40px;
+            background: radial-gradient(circle at top right, var(--accent-glow) 0%, transparent 60%);
         }
         .hero-content { max-width: 550px; z-index: 2; }
         .badge {
-            background: rgba(59, 130, 246, 0.1); color: var(--accent);
-            padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block;
+            background: var(--card-bg); color: var(--accent); border: 1px solid var(--border-color);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; display: inline-block;
         }
         .hero h1 {
-            font-size: 4rem; line-height: 1.1; margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #a1a1aa);
+            font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.05; margin-bottom: 20px;
+            background: linear-gradient(to right, var(--text-main), var(--text-muted));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px; max-width: 450px; }
+        .hero p { color: var(--text-muted); font-size: 1.15rem; margin-bottom: 35px; max-width: 480px; }
         
+        /* Buttons */
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn {
+            padding: 14px 30px; border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+            text-decoration: none; transition: 0.3s; cursor: pointer; text-align: center;
+        }
+        .btn-primary { background: var(--accent); color: white; border: none; }
+        .btn-primary:hover { box-shadow: 0 10px 25px var(--accent-glow); transform: translateY(-2px); }
+        .btn-outline { border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn-outline:hover { background: var(--text-main); color: var(--bg-color); }
+
+        /* --- THE NEW PREMIUM ID CARD (HERO IMAGE) --- */
         .hero-image-wrapper {
-            perspective: 1000px; width: 100%; max-width: 600px;
-            display: flex; justify-content: center; align-items: center;
+            perspective: 1000px; width: 100%; max-width: 650px; z-index: 2;
         }
 
-        .profile-card {
-            width: 100%; border-radius: 15px; overflow: hidden;
-            transform: rotateY(-10deg) rotateX(5deg); transition: all 0.5s ease-out;
-            box-shadow: -20px 20px 60px rgba(0,0,0,0.5), 0 0 20px rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1); background: #111;
+        .identity-card {
+            width: 100%; background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: var(--radius); overflow: hidden;
+            transform: rotateY(-8deg) rotateX(4deg); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: -20px 30px 60px rgba(0,0,0,0.6), 0 0 30px var(--accent-glow);
+            position: relative;
         }
-        .profile-card img { width: 100%; height: auto; display: block; }
-        .profile-card:hover {
+        
+        .identity-card:hover {
             transform: rotateY(0deg) rotateX(0deg) scale(1.02);
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); border-color: var(--accent);
+            border-color: var(--accent); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 50px var(--accent-glow);
         }
 
-        .work-section { padding: 5rem 10%; }
-        .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
+        /* Banner Area */
+        .id-banner {
+            width: 100%; height: 160px; background: #111;
+            /* Placeholder gradient if image doesn't load fast */
+            background-image: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
+            position: relative; overflow: hidden;
+        }
+        /* Assuming your new banner is named 'linkedin-cover.jpg' */
+        .id-banner img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+        /* Content Area */
+        .id-content { padding: 0 30px 30px; position: relative; }
+        
+        /* Profile Picture */
+        .id-profile-pic {
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 4px solid var(--bg-color); background: #222;
+            margin-top: -60px; margin-bottom: 15px; position: relative; z-index: 2;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .id-profile-pic img { width: 100%; height: 100%; object-fit: cover; }
+
+        .id-name { font-size: 1.8rem; font-family: 'Outfit'; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .id-title { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.4; }
+        
+        /* Stats Strip */
+        .id-stats {
+            display: flex; gap: 20px; border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-val { font-weight: 800; color: var(--text-main); font-size: 1.1rem; }
+        .stat-label { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- CASE STUDY GRID --- */
+        .work-section { padding: 100px 8%; }
+        .section-title { font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 50px; text-align: center; }
         .section-title span { color: var(--accent); }
 
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
 
         .case-card {
-            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px; overflow: hidden; transition: all 0.4s ease;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: var(--radius); overflow: hidden; transition: all 0.4s ease;
         }
         .case-card:hover {
             transform: translateY(-10px); border-color: var(--accent);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
         }
 
-        .card-thumb { width: 100%; height: 200px; background: #1e1e1e; overflow: hidden; }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 0.5s ease; }
-        .case-card:hover .card-thumb img { transform: scale(1.05); opacity: 1; }
+        .card-thumb { width: 100%; height: 220px; background: #111; overflow: hidden; position: relative; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: transform 0.6s ease; }
+        .case-card:hover .card-thumb img { transform: scale(1.08); opacity: 1; }
 
-        .card-content { padding: 25px; }
-        .tag { color: var(--accent); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; display: block;}
-        .card-title { font-size: 1.35rem; margin-bottom: 15px; color: white; }
-        .card-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+        .card-content { padding: 30px; }
+        .tag { color: var(--accent); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; margin-bottom: 12px; display: block;}
+        .card-title { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2;}
+        .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5; }
 
         .view-btn {
-            display: inline-flex; align-items: center; color: white;
-            text-decoration: none; font-weight: 600; font-size: 0.85rem;
+            display: inline-flex; align-items: center; color: var(--text-main);
+            text-decoration: none; font-weight: 700; font-size: 0.9rem;
             transition: 0.3s; border-bottom: 1px solid transparent; cursor: pointer;
         }
         .view-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-        footer { text-align: center; padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem; }
-        .contact-email { font-size: 2rem; color: var(--text-main); text-decoration: none; transition: 0.3s; font-family: var(--font-display); }
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 60px 8%; border-top: 1px solid var(--border-color); margin-top: 40px; }
+        .contact-email { font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--text-main); text-decoration: none; transition: 0.3s; font-family: var(--font-display); font-weight: 800;}
         .contact-email:hover { color: var(--accent); }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
-            .hero-content { margin-bottom: 50px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
+            .hero-content { margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+            .identity-card { transform: none; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+            .id-stats { justify-content: center; }
+            .id-name { justify-content: center; }
         }
 
         @media (max-width: 768px) {
             .cursor, .cursor-dot { display: none !important; }
             body { cursor: auto !important; }
-            .hero h1 { font-size: 2.8rem; }
-            .contact-email { font-size: 1.2rem; }
+            .work-section { padding: 60px 5%; }
+            nav { padding: 1rem 5%; }
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
     <div id="doc-warning-modal">
         <div class="modal-content">
-            <h2 style="color:var(--accent); font-size: 1.8rem; margin-bottom: 15px;">⚠️ Switch to Desktop</h2>
-            <p style="color:var(--text-muted); margin-bottom: 20px;">This deep-dive analysis contains complex data visualizations best viewed on a larger screen.</p>
-            <button class="close-modal-btn" onclick="closeModal()">I'll check on PC</button>
+            <h2 style="color:var(--accent); font-size: 1.8rem; margin-bottom: 15px;">⚠️ Desktop View Only</h2>
+            <p style="color:var(--text-muted); margin-bottom: 25px;">This deep-dive strategic analysis contains complex models best viewed on a larger screen.</p>
+            <button class="close-modal-btn" onclick="closeModal()">Got it, proceed</button>
         </div>
     </div>
 
@@ -170,24 +244,48 @@
         <div class="cursor-dot"></div>
 
         <nav>
-            <div class="logo">Kunal Binjewar<span style="color:var(--accent)">.</span></div>
-            <a href="https://linkedin.com/in/kunalbinjewar" target="_blank" class="cta-btn">LinkedIn Profile</a>
+            <div class="logo">KUNAL BINJEWAR.</div>
+            <div class="nav-actions">
+                <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
+            </div>
         </nav>
 
         <section class="hero">
             <div class="hero-content">
-                <span class="badge">Business Analyst & Consultant</span>
+                <span class="badge">Independent Consultant</span>
                 <h1>Data Driven.<br>Strategy Focused.</h1>
-                <p>I transform complex data into actionable business strategies. Specializing in market research, consulting, and narrative-driven analysis.</p>
-                <div style="display: flex; gap: 15px; justify-content: center;"> 
-                    <a href="#work" class="cta-btn" style="background: white; color: black; border: none;">View Case Studies</a>
-                    <a href="mailto:binjewarkunal@gmail.com" class="cta-btn">Contact Me</a>
+                <p>I transform complex market signals into actionable business strategies. Specializing in Go-To-Market, competitor analysis, and narrative-driven growth.</p>
+                <div class="btn-group"> 
+                    <a href="#work" class="btn btn-primary">View Case Studies</a>
+                    <a href="mailto:binjewarkunal@gmail.com" class="btn btn-outline">Contact Me</a>
                 </div>
             </div>
             
             <div class="hero-image-wrapper">
-                <div class="profile-card">
-                    <img src="Screenshot 2026-01-21 201556.png" alt="LinkedIn Profile">
+                <div class="identity-card">
+                    <div class="id-banner">
+                        <img src="c.png" alt="Cover Banner" fetchpriority="high">
+                    </div>
+                    <div class="id-content">
+                        <div class="id-profile-pic">
+                            <img src="profile.jpeg" alt="Kunal Binjewar">
+                        </div>
+                        <div class="id-name">
+                            Kunal Binjewar 
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                        <div class="id-title">Growth Strategy Consultant & Executive Ghostwriter | Go-To-Market, Content Strategy & Inbound Pipelines for B2B Tech.</div>
+                        <div class="id-stats">
+                            <div class="stat-item">
+                                <span class="stat-val">4.5M+</span>
+                                <span class="stat-label">Impressions</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-val">20K+</span>
+                                <span class="stat-label">Followers</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -197,7 +295,7 @@
             <div class="grid">
                 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="india-ai-thumb.png" alt="India AI Summit 2026"></div>
+                    <div class="card-thumb"><img src="india-ai-thumb.png" alt="India AI Summit 2026" loading="eager"></div>
                     <div class="card-content">
                         <span class="tag">Trending / Geopolitics</span>
                         <h3 class="card-title">India-AI Summit 2026: The Deployment Shift</h3>
@@ -207,7 +305,7 @@
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="qcommerce-thumb.png" alt="Zepto vs Blinkit Audit"></div>
+                    <div class="card-thumb"><img src="qcommerce-thumb.png" alt="Zepto vs Blinkit Audit" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Product Audit / Q-Commerce</span>
                         <h3 class="card-title">Zepto vs. Blinkit: Market Audit</h3>
@@ -217,7 +315,7 @@
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="scaler-tier2-thumb.png" alt="Scaler Tier-2 GTM Strategy"></div>
+                    <div class="card-thumb"><img src="scaler-tier2-thumb.png" alt="Scaler Tier-2 GTM Strategy" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">GTM Strategy / EdTech</span>
                         <h3 class="card-title">Scaling 'Scaler' in Tier-2</h3>
@@ -227,17 +325,17 @@
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="gold-silver-thumb.png" alt="Gold-Silver Crash"></div>
+                    <div class="card-thumb"><img src="gold-silver-thumb.png" alt="Gold-Silver Crash" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Finance / Market Correction</span>
                         <h3 class="card-title">The Precious Metals 'Detox'</h3>
-                        <p class="card-desc">Analyzing the historic Jan 2025 crash: A market detox or a well-laid dollar trap? </p>
+                        [cite_start]<p class="card-desc">Analyzing the historic Jan 2025 crash: A market detox or a well-laid dollar trap? [cite: 3, 4]</p>
                         <a href="docs/GoldSilver_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="zerodha-thumb.png" alt="Zerodha"></div>
+                    <div class="card-thumb"><img src="zerodha-thumb.png" alt="Zerodha" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">FinTech / Disruption</span>
                         <h3 class="card-title">The Zerodha Phenomenon</h3>
@@ -247,17 +345,17 @@
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="Maggi-thumb.png" alt="Mountain Maggi"></div>
+                    <div class="card-thumb"><img src="Maggi-thumb.png" alt="Mountain Maggi" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Psychology / Economics</span>
                         <h3 class="card-title">High-Altitude Retail Strategy</h3>
-                        <p class="card-desc">Analyzing price inelasticity and survival branding in mountain-based retail models.</p>
+                        [cite_start]<p class="card-desc">Analyzing price inelasticity and survival branding in mountain-based retail models. [cite: 28, 37]</p>
                         <a href="docs/MountainMaggi_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="talent-thumb.png" alt="Talent"></div>
+                    <div class="card-thumb"><img src="talent-thumb.png" alt="Talent" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">HR Analytics / ROI</span>
                         <h3 class="card-title">The Economics of Elite Talent</h3>
@@ -267,7 +365,7 @@
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="ilovepdf-thumb.png" alt="iLovePDF"></div>
+                    <div class="card-thumb"><img src="ilovepdf-thumb.png" alt="iLovePDF" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">SaaS / UX Strategy</span>
                         <h3 class="card-title">iLovePDF: Zero-Friction UX</h3>
@@ -277,41 +375,41 @@
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="thinkraw-thumb.png" alt="Think Raw"></div>
+                    <div class="card-thumb"><img src="thinkraw-thumb.png" alt="Think Raw" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Operational Resilience</span>
                         <h3 class="card-title">Think Raw: Waste to Wealth</h3>
-                        <p class="card-desc">Operational analysis of Bihar's corn-husk innovation for Indian Railways. </p>
+                        <p class="card-desc">Operational analysis of Bihar's corn-husk innovation for Indian Railways.</p>
                         <a href="docs/ThinkRaw_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="tupperware-thumb.png" alt="Tupperware"></div>
+                    <div class="card-thumb"><img src="tupperware-thumb.png" alt="Tupperware" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Management Failure</span>
                         <h3 class="card-title">The Tupperware Relevance Trap</h3>
-                        <p class="card-desc">Analyzing how channel conflict and digital resistance collapsed a kitchen legacy brand. </p>
+                        <p class="card-desc">Analyzing how channel conflict and digital resistance collapsed a kitchen legacy brand.</p>
                         <a href="docs/Tupperware_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="pulse-thumb.png" alt="Pulse Tax"></div>
+                    <div class="card-thumb"><img src="pulse-thumb.png" alt="Pulse Tax" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Trade Diplomacy</span>
                         <h3 class="card-title">India's Trade Diplomacy shield</h3>
-                        <p class="card-desc">A strategic analysis of tit-for-tat import duties and protectionist economics. </p>
+                        <p class="card-desc">A strategic analysis of tit-for-tat import duties and protectionist economics.</p>
                         <a href="docs/PulseTax_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
 
                 <div class="case-card">
-                    <div class="card-thumb"><img src="journalism-thumb.png" alt="Journalism"></div>
+                    <div class="card-thumb"><img src="journalism-thumb.png" alt="Journalism" loading="lazy"></div>
                     <div class="card-content">
                         <span class="tag">Institutional Risk</span>
                         <h3 class="card-title">Erosion of the Fourth Pillar</h3>
-                        <p class="card-desc">Analyzing the systemic developmental cost of silencing accountability in emerging economies. </p>
+                        <p class="card-desc">Analyzing the systemic developmental cost of silencing accountability in emerging economies.</p>
                         <a href="docs/Journalism_CaseStudy.docx" class="view-btn">📄 Open Analysis Document</a>
                     </div>
                 </div>
@@ -321,11 +419,15 @@
         <footer>
             <p style="color:var(--text-muted); margin-bottom:10px;">Strategic Consulting | Business Analysis</p>
             <a href="mailto:binjewarkunal@gmail.com" class="contact-email">binjewarkunal@gmail.com</a>
-            <p style="font-size: 0.8rem; color: #333; margin-top: 20px;">© 2026 Kunal Binjewar. All Rights Reserved.</p>
+            <div style="margin-top: 20px;">
+                <a href="https://linkedin.com/in/kunalbinjewar" target="_blank" style="color:var(--accent); text-decoration: none; margin: 0 10px;">LinkedIn</a>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 30px;">© 2026 Kunal Binjewar. All Rights Reserved.</p>
         </footer>
     </div>
 
     <script>
+        // Custom Cursor Logic
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
         const warningModal = document.getElementById('doc-warning-modal');
@@ -339,7 +441,7 @@
             }
         });
 
-        document.querySelectorAll('a, button, .profile-card').forEach(item => {
+        document.querySelectorAll('a, button, .identity-card').forEach(item => {
             item.addEventListener('mouseenter', () => {
                 if(window.innerWidth > 768) {
                     cursor.style.transform = 'scale(1.5)';
@@ -349,11 +451,12 @@
             item.addEventListener('mouseleave', () => {
                 if(window.innerWidth > 768) {
                     cursor.style.transform = 'scale(1)';
-                    cursor.style.borderColor = 'white';
+                    cursor.style.borderColor = 'var(--text-main)';
                 }
             });
         });
 
+        // Mobile Warning Modal Logic
         document.querySelectorAll('.view-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 if(window.innerWidth < 1024) {
@@ -364,6 +467,19 @@
         });
 
         function closeModal() { warningModal.style.display = 'none'; }
+
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+            // Update cursor color on theme switch
+            setTimeout(() => {
+                const color = getComputedStyle(document.body).getPropertyValue('--text-main').trim();
+                cursor.style.borderColor = color;
+                cursorDot.style.background = color;
+            }, 50);
+        }
     </script>
 </body>
 </html>
