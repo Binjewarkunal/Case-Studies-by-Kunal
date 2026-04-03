@@ -377,22 +377,123 @@
         }
         .contact-email:hover { color: var(--accent); }
 
-        /* RESPONSIVE */
+        /* ═══════════════════════════════════════
+           RESPONSIVE — TABLET (max 1024px)
+        ═══════════════════════════════════════ */
         @media (max-width: 1024px) {
             .hero { flex-direction: column; text-align: center; padding-top: 140px; }
             .hero-content { margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+            .hero-quote { text-align: left; }
             .identity-card { transform: none; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-            .id-stats { justify-content: center; }
+            .id-stats { justify-content: center; flex-wrap: wrap; gap: 16px; }
             .id-name { justify-content: center; }
             .featured-card { grid-template-columns: 1fr; }
             .featured-thumb { height: 240px; }
         }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — MOBILE (max 768px)
+        ═══════════════════════════════════════ */
         @media (max-width: 768px) {
+            /* Kill custom cursor */
             .cursor, .cursor-dot { display: none !important; }
             body { cursor: auto !important; }
-            .work-section { padding: 60px 5%; }
-            nav { padding: 1rem 5%; }
+
+            /* Nav — compact, no overflow */
+            nav { padding: 0.9rem 5%; gap: 8px; }
+            .logo { font-size: 1.1rem; }
+            .availability-badge { padding: 6px 10px; }
             .availability-badge span { display: none; }
+            .theme-btn { padding: 6px 12px; font-size: 0.75rem; }
+
+            /* Hero */
+            .hero { padding: 100px 5% 50px; gap: 30px; }
+            .hero h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
+            .hero p { font-size: 1rem; }
+            .hero-quote blockquote { font-size: 0.92rem; }
+            .btn { padding: 12px 22px; font-size: 0.88rem; }
+
+            /* Identity card — fix stats overflow */
+            .id-content { padding: 0 18px 22px; }
+            .id-profile-pic { width: 90px; height: 90px; margin-top: -45px; }
+            .id-name { font-size: 1.4rem; flex-wrap: wrap; }
+            .id-title { font-size: 0.85rem; }
+            .id-stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                justify-items: start;
+            }
+            .stat-val { font-size: 1rem; }
+            .stat-label { font-size: 0.68rem; letter-spacing: 0.5px; }
+
+            /* Work section */
+            .work-section { padding: 50px 4%; }
+            .section-title { font-size: clamp(1.8rem, 8vw, 2.5rem); margin-bottom: 20px; }
+
+            /* Filter bar — scrollable on mobile */
+            .filter-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                margin-bottom: 30px;
+            }
+            .filter-bar::-webkit-scrollbar { display: none; }
+            .filter-btn { flex-shrink: 0; font-size: 0.75rem; padding: 7px 16px; }
+
+            /* Currently Analyzing card — stack on mobile */
+            .live-card[style*="grid"] {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            .live-card[style*="grid"] .live-thumb {
+                min-height: 140px !important;
+                height: 140px !important;
+            }
+            .live-card[style*="grid"] .live-card-content {
+                padding: 20px !important;
+                gap: 16px !important;
+            }
+            .live-card-title { font-size: 1.2rem !important; }
+
+            /* Featured card */
+            .featured-card { grid-template-columns: 1fr; margin-bottom: 30px; }
+            .featured-thumb { height: 200px; }
+            .featured-content { padding: 24px; }
+            .featured-title { font-size: 1.5rem; }
+            .featured-badge { font-size: 0.62rem; top: 14px; left: 14px; padding: 4px 10px; }
+
+            /* Case study grid — single column */
+            .grid { grid-template-columns: 1fr; gap: 24px; }
+            .card-thumb { height: 180px; }
+            .card-content { padding: 20px; }
+            .card-title { font-size: 1.2rem; }
+            .card-desc { font-size: 0.88rem; }
+
+            /* Footer */
+            footer { padding: 40px 5%; }
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — TINY (max 400px, e.g. Narzo 10A)
+        ═══════════════════════════════════════ */
+        @media (max-width: 400px) {
+            nav { padding: 0.8rem 4%; }
+            .logo { font-size: 1rem; }
+            .hero { padding: 90px 4% 40px; }
+            .hero h1 { font-size: 2rem; }
+            .id-name { font-size: 1.2rem; }
+            .id-stats { gap: 10px; }
+            .stat-val { font-size: 0.95rem; }
+            .stat-label { font-size: 0.62rem; }
+            .work-section { padding: 40px 4%; }
+            .featured-title { font-size: 1.3rem; }
+            .card-title { font-size: 1.1rem; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
