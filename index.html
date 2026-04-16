@@ -370,6 +370,90 @@
         }
 
         /* ═══════════════════════════════════════
+           BRAND COLLABORATIONS
+        ═══════════════════════════════════════ */
+        .collabs-section {
+            padding: 80px 8%;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .collabs-label {
+            display: inline-block; font-size: 0.75rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);
+            border: 1px solid var(--border-color); padding: 6px 20px;
+            border-radius: 50px; margin-bottom: 14px;
+        }
+        .collabs-sub {
+            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 50px;
+        }
+        .collabs-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; text-align: left;
+        }
+        .collab-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 28px;
+            display: flex; flex-direction: column; gap: 20px;
+            transition: all 0.35s ease;
+        }
+        .collab-card:hover {
+            border-color: var(--accent); transform: translateY(-6px);
+            box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5);
+        }
+        .collab-top { display: flex; gap: 16px; align-items: flex-start; }
+        .collab-logo-wrap {
+            width: 60px; height: 60px; border-radius: 14px; flex-shrink: 0;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; border: 1px solid var(--border-color);
+        }
+        .kt-logo { background: #e8f5ee; border-color: #b7dfc6; }
+        .fc-logo { background: #eff6ff; border-color: #bfdbfe; }
+        .collab-brand-info { flex: 1; }
+        .collab-brand-name {
+            font-weight: 800; font-size: 0.95rem; color: var(--text-main);
+            margin-bottom: 6px; font-family: var(--font-display);
+        }
+        .collab-brand-desc {
+            font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;
+        }
+        .collab-what {
+            background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.1);
+            border-radius: 12px; padding: 14px 16px;
+        }
+        .collab-what-label {
+            font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--accent); margin-bottom: 6px;
+        }
+        .collab-what-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+        .collab-post-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: #0077b5; font-size: 0.82rem; font-weight: 700;
+            text-decoration: none; border: 1px solid rgba(0,119,181,0.25);
+            padding: 8px 16px; border-radius: 50px;
+            background: rgba(0,119,181,0.05);
+            transition: all 0.25s; width: fit-content;
+        }
+        .collab-post-link:hover {
+            background: rgba(0,119,181,0.12); border-color: #0077b5;
+            transform: translateY(-1px);
+        }
+        .collab-pitching {
+            border-style: dashed; border-color: rgba(59,130,246,0.25);
+            background: rgba(59,130,246,0.02);
+        }
+        .collab-pitching:hover { border-color: var(--accent); border-style: solid; }
+        .collab-pitching-inner {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; height: 100%; gap: 14px;
+        }
+        .collab-pitch-icon { font-size: 2rem; }
+        .collab-pitch-title {
+            font-size: 1.2rem; font-weight: 800; font-family: var(--font-display);
+            color: var(--text-main);
+        }
+        .collab-pitch-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* ═══════════════════════════════════════
            SCROLL PROGRESS BAR
         ═══════════════════════════════════════ */
         #scroll-progress {
@@ -728,6 +812,10 @@
             .industries-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
             .industry-tile { padding: 22px 18px; }
 
+            /* Collabs */
+            .collabs-section { padding: 60px 4%; }
+            .collabs-grid { grid-template-columns: 1fr; gap: 18px; }
+
             /* Analytics panel */
             .analytics-panel { padding: 22px; }
             .analytics-stats-row { grid-template-columns: 1fr; gap: 16px; }
@@ -827,7 +915,7 @@
                         <div class="id-title">Growth Strategy Consultant & Executive Ghostwriter | Go-To-Market, Content Strategy & Inbound Pipelines for B2B Tech.</div>
                         <div class="id-stats">
                             <div class="stat-item">
-                                <span class="stat-val">5M+</span>
+                                <span class="stat-val">4.5M+</span>
                                 <span class="stat-label">Impressions</span>
                             </div>
                             <div class="stat-item">
@@ -852,6 +940,68 @@
         <div class="metrics-strip">
             <div class="ticker-track" id="ticker"></div>
         </div>
+
+        <!-- BRAND COLLABORATIONS -->
+        <section class="collabs-section">
+            <div class="collabs-label">Paid Brand Collaborations</div>
+            <p class="collabs-sub">Actively pitching & partnering with brands that align with my audience's interests.</p>
+            <div class="collabs-grid">
+
+                <div class="collab-card">
+                    <div class="collab-top">
+                        <div class="collab-logo-wrap kt-logo">
+                            <span style="font-size:1.4rem; font-weight:900; color:#2a6d3e; letter-spacing:-1px;">KT</span>
+                            <span style="font-size:0.55rem; font-weight:800; color:#2a6d3e; letter-spacing:1px; display:block; margin-top:-2px;">PROFESSIONAL</span>
+                        </div>
+                        <div class="collab-brand-info">
+                            <div class="collab-brand-name">KT Professional · KT Men</div>
+                            <div class="collab-brand-desc">Science-backed men's grooming brand. Plant-derived keratin protein for Indian hair. Featured in Economic Times. Official partner of MI & RCB.</div>
+                        </div>
+                    </div>
+                    <div class="collab-what">
+                        <div class="collab-what-label">What I did</div>
+                        <div class="collab-what-text">Paid LinkedIn content collaboration — brand storytelling & audience-aligned product positioning for KT Men's launch campaign.</div>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/kunalbinjewar_mensgrooming-brands-india-activity-7439527521160921089-uyj4" target="_blank" class="collab-post-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        View Collab Post
+                    </a>
+                </div>
+
+                <div class="collab-card">
+                    <div class="collab-top">
+                        <div class="collab-logo-wrap fc-logo">
+                            <span style="font-size:1rem; font-weight:900; color:#1a56db; letter-spacing:-0.5px; line-height:1;">First<br>Club</span>
+                        </div>
+                        <div class="collab-brand-info">
+                            <div class="collab-brand-name">FirstClub</div>
+                            <div class="collab-brand-desc">VC-backed consumer tech & retail startup. Omnichannel platform combining q-commerce speed with offline trust. Founded by ex-CEO of Cleartrip.</div>
+                        </div>
+                    </div>
+                    <div class="collab-what">
+                        <div class="collab-what-label">What I did</div>
+                        <div class="collab-what-text">Paid LinkedIn content collaboration — brand awareness campaign targeting startup & D2C audience for FirstClub's early growth phase.</div>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/kunalbinjewar_firstclub-honestfood-grocery-activity-7450394136043745280-1Cry" target="_blank" class="collab-post-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        View Collab Post
+                    </a>
+                </div>
+
+                <!-- PITCHING CARD -->
+                <div class="collab-card collab-pitching">
+                    <div class="collab-pitching-inner">
+                        <div class="collab-pitch-icon">📨</div>
+                        <div class="collab-pitch-title">Your Brand Here?</div>
+                        <p class="collab-pitch-desc">Actively pitching & open to collaborations with brands targeting India's startup, finance, and tech audience.</p>
+                        <a href="mailto:binjewarkunal@gmail.com" class="collab-post-link" style="justify-content:center;">
+                            Let's Talk →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- HOW I WORK PROCESS SECTION -->
         <section class="process-section">
@@ -1176,7 +1326,7 @@
                         <div class="analytics-growth" style="color: var(--text-muted);">Unique accounts · same period</div>
                     </div>
                     <div class="analytics-stat-block">
-                        <div class="analytics-stat-val">5M+</div>
+                        <div class="analytics-stat-val">4.5M+</div>
                         <div class="analytics-stat-label">Total All-Time Impressions</div>
                         <div class="analytics-growth" style="color: var(--text-muted);">Cumulative · all posts</div>
                     </div>
