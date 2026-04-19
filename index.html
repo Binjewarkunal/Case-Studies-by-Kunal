@@ -370,6 +370,99 @@
         }
 
         /* ═══════════════════════════════════════
+           CLIENT WORK SECTION
+        ═══════════════════════════════════════ */
+        .client-work-section {
+            padding: 100px 8%;
+            border-top: 1px solid var(--border-color);
+        }
+        .client-work-section .section-title { text-align: center; margin-bottom: 14px; }
+        .client-work-subtitle {
+            text-align: center; color: var(--text-muted); font-size: 1rem;
+            max-width: 580px; margin: 0 auto 60px;
+        }
+        .client-cards-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+        .client-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 24px; padding: 32px;
+            display: flex; flex-direction: column; gap: 22px;
+            transition: all 0.35s ease; position: relative; overflow: hidden;
+        }
+        .client-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--accent), #60a5fa);
+            opacity: 0; transition: opacity 0.35s;
+        }
+        .client-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6); }
+        .client-card:hover::before { opacity: 1; }
+
+        /* Status badge */
+        .client-status {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 50px; font-size: 0.7rem;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            width: fit-content;
+        }
+        .status-delivered { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+        .status-ongoing   { background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
+        .status-awaiting  { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+        .status-pitching  { background: rgba(168,85,247,0.1); color: #a855f7; border: 1px solid rgba(168,85,247,0.25); }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse-dot 2s infinite; }
+
+        /* Client header */
+        .client-header { display: flex; gap: 16px; align-items: flex-start; }
+        .client-avatar {
+            width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.1rem; font-family: var(--font-display);
+            border: 1px solid var(--border-color);
+        }
+        .client-name { font-size: 1.1rem; font-weight: 800; font-family: var(--font-display); color: var(--text-main); margin-bottom: 3px; }
+        .client-role { font-size: 0.78rem; color: var(--accent); font-weight: 700; margin-bottom: 3px; }
+        .client-company { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* Work delivered */
+        .client-work-tag {
+            font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 8px;
+        }
+        .client-work-title {
+            font-size: 1.05rem; font-weight: 800; font-family: var(--font-display);
+            color: var(--text-main); margin-bottom: 8px; line-height: 1.3;
+        }
+        .client-work-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* Deliverables pills */
+        .client-deliverables { display: flex; flex-wrap: wrap; gap: 8px; }
+        .deliverable-pill {
+            padding: 4px 12px; border-radius: 50px; font-size: 0.72rem; font-weight: 700;
+            background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15);
+            color: var(--text-muted);
+        }
+
+        /* Card footer */
+        .client-card-footer { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; border-top: 1px solid var(--border-color); }
+        .client-pdf-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 8px 16px; border-radius: 50px; font-size: 0.78rem; font-weight: 700;
+            background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2);
+            color: var(--accent); text-decoration: none; transition: all 0.25s; cursor: pointer;
+        }
+        .client-pdf-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .client-note {
+            font-size: 0.72rem; color: var(--text-muted); display: flex;
+            align-items: center; gap: 5px; font-style: italic;
+        }
+
+        /* Highlight card — for most prestigious */
+        .client-card.highlight-card { border-color: rgba(251,191,36,0.3); box-shadow: 0 0 30px rgba(251,191,36,0.06); }
+        .client-card.highlight-card:hover { border-color: #fbbf24; box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6), 0 0 40px rgba(251,191,36,0.1); }
+        .client-card.highlight-card::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+
+        /* ═══════════════════════════════════════
            BRAND COLLABORATIONS
         ═══════════════════════════════════════ */
         .collabs-section {
@@ -812,6 +905,11 @@
             .industries-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
             .industry-tile { padding: 22px 18px; }
 
+            /* Client work */
+            .client-work-section { padding: 60px 4%; }
+            .client-cards-grid { grid-template-columns: 1fr; gap: 20px; }
+            .client-card { padding: 24px; }
+
             /* Collabs */
             .collabs-section { padding: 60px 4%; }
             .collabs-grid { grid-template-columns: 1fr; gap: 18px; }
@@ -940,6 +1038,183 @@
         <div class="metrics-strip">
             <div class="ticker-track" id="ticker"></div>
         </div>
+
+        <!-- CLIENT WORK -->
+        <section class="client-work-section">
+            <h2 class="section-title">Client <span>Work</span></h2>
+            <p class="client-work-subtitle">Real strategies. Real founders. Real execution. From early-stage startups to senior professionals — here's what I've built for them.</p>
+
+            <div class="client-cards-grid">
+
+                <!-- CLIENT 1: COMFIT / NAMIT -->
+                <div class="client-card">
+                    <div class="client-status status-delivered">
+                        <div class="status-dot"></div> Delivered & Executing
+                    </div>
+                    <div class="client-header">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #15803d;">NM</div>
+                        <div>
+                            <div class="client-name">Namit Malhotra</div>
+                            <div class="client-role">Founder — ComFit</div>
+                            <div class="client-company">Associate Project Manager, Escalante · Fitness & Health Startup</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="client-work-tag">Project</div>
+                        <div class="client-work-title">ComFit Content Ecosystem & Brand Growth Strategy</div>
+                        <div class="client-work-desc">Namit is building ComFit — a fitness consulting brand for busy professionals, youth, and working-age adults. He approached me confused about where to start. I built him a complete content strategy with 3 audience buckets, a weekly content execution workflow, a 2-week buffer plan, and a LinkedIn + Instagram growth roadmap. He went from confusion to clarity — and is now actively executing.</div>
+                    </div>
+                    <div class="client-deliverables">
+                        <span class="deliverable-pill">Content Strategy</span>
+                        <span class="deliverable-pill">3-Bucket Framework</span>
+                        <span class="deliverable-pill">Weekly Workflow</span>
+                        <span class="deliverable-pill">Brand Roadmap</span>
+                        <span class="deliverable-pill">LinkedIn + Instagram</span>
+                    </div>
+                    <div class="client-card-footer">
+                        <a href="Strategic_Action_Plan_ComFit.pdf" class="client-pdf-btn" target="_blank">
+                            📄 View Strategy Document
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CLIENT 2: PIXSYSAI / AKASH -->
+                <div class="client-card">
+                    <div class="client-status status-ongoing">
+                        <div class="status-dot"></div> Delivered & Ongoing
+                    </div>
+                    <div class="client-header">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1d4ed8;">AV</div>
+                        <div>
+                            <div class="client-name">Akash Verma</div>
+                            <div class="client-role">Founder — PixSysAi</div>
+                            <div class="client-company">Ex-Morgan Stanley · Lead Business Consultant, Kipa.ai</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="client-work-tag">Project</div>
+                        <div class="client-work-title">Website Revamp Strategy + GTM & Business Growth Roadmap</div>
+                        <div class="client-work-desc">Akash is building PixSysAi — focused on Data Engineering & BI, AI & ML, and Digital Marketing. His website was cluttered and generic. I audited it, built a complete website revamp strategy with messaging architecture, UX overhaul plan, SEO positioning, and CRO framework. Then built a full GTM and business action plan for client acquisition. He loved it — currently pitching clients with my strategy in hand. Ongoing consulting.</div>
+                    </div>
+                    <div class="client-deliverables">
+                        <span class="deliverable-pill">Website Strategy</span>
+                        <span class="deliverable-pill">GTM Roadmap</span>
+                        <span class="deliverable-pill">UX Architecture</span>
+                        <span class="deliverable-pill">SEO Positioning</span>
+                        <span class="deliverable-pill">CRO Framework</span>
+                        <span class="deliverable-pill">Action Plan</span>
+                    </div>
+                    <div class="client-card-footer">
+                        <a href="Website_Revamp.pdf" class="client-pdf-btn" target="_blank">
+                            📄 Website Strategy Doc
+                        </a>
+                        <a href="PixSysAi_Website_Revamp.pdf" class="client-pdf-btn" target="_blank">
+                            📄 Action Plan Doc
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CLIENT 3: MUNISH GOEL — highlight card -->
+                <div class="client-card highlight-card">
+                    <div class="client-status status-delivered">
+                        <div class="status-dot"></div> Delivered · Senior Professional
+                    </div>
+                    <div class="client-header">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #fef9c3, #fde68a); color: #92400e;">MG</div>
+                        <div>
+                            <div class="client-name">Munish Goel</div>
+                            <div class="client-role">Author — Man Dad Hero</div>
+                            <div class="client-company">Vice President · StoneX Global</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="client-work-tag">Project</div>
+                        <div class="client-work-title">Author LinkedIn Content & Personal Brand Strategy</div>
+                        <div class="client-work-desc">Munish is a VP at StoneX Global and author of "Man Dad Hero" — targeting parents and professionals. He approached me to build a LinkedIn content strategy that reflects his author voice authentically, not corporately. I built a "Real Talk" content framework — grounded storytelling, book-to-life content mapping, community engagement plan, and profile optimization. He liked it, is trying the approach, and this engagement gave me one of my most valuable senior-level professional connections.</div>
+                    </div>
+                    <div class="client-deliverables">
+                        <span class="deliverable-pill">LinkedIn Strategy</span>
+                        <span class="deliverable-pill">Author Voice Framework</span>
+                        <span class="deliverable-pill">Content Calendar</span>
+                        <span class="deliverable-pill">Profile Optimization</span>
+                        <span class="deliverable-pill">Community Plan</span>
+                    </div>
+                    <div class="client-card-footer">
+                        <a href="Author_LinkedIn_Strategy.pdf" class="client-pdf-btn" target="_blank">
+                            📄 View Strategy Document
+                        </a>
+                        <span class="client-note">⭐ VP · StoneX Global · Global Financial Services Firm</span>
+                    </div>
+                </div>
+
+                <!-- CLIENT 4: ANTHLETE -->
+                <div class="client-card">
+                    <div class="client-status status-awaiting">
+                        <div class="status-dot"></div> Proposal Sent · Awaiting Response
+                    </div>
+                    <div class="client-header">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #fee2e2, #fecaca); color: #b91c1c;">RS</div>
+                        <div>
+                            <div class="client-name">Rahul Sharma</div>
+                            <div class="client-role">Founder — Anthlete Nutritions</div>
+                            <div class="client-company">Co-founded with Bhuvneshwar Kumar & Mohit Sharma · NFSU-NSTS Certified</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="client-work-tag">Self-Initiated Strategic Proposal</div>
+                        <div class="client-work-title">Brand Growth & Market Strategy — Anthlete Nutritions</div>
+                        <div class="client-work-desc">I independently researched Anthlete Nutritions — a cricketer-backed, NFSU-NSTS certified nutrition brand co-founded by Bhuvneshwar Kumar and Mohit Sharma. I identified their core gap: strong credibility, near-zero visibility. I built a full brand strategy covering Trust-First positioning, GTM for Tier 2 & 3 India, market expansion beyond gym-goers to 500M+ active Indians, and a community-before-campaigns framework. Proactively sent to Founder Rahul — awaiting response.</div>
+                    </div>
+                    <div class="client-deliverables">
+                        <span class="deliverable-pill">Brand Positioning</span>
+                        <span class="deliverable-pill">GTM Strategy</span>
+                        <span class="deliverable-pill">Tier 2 & 3 Market Entry</span>
+                        <span class="deliverable-pill">Community Framework</span>
+                        <span class="deliverable-pill">Trust Architecture</span>
+                    </div>
+                    <div class="client-card-footer">
+                        <a href="Anthlete_Brand_Strategy.pdf" class="client-pdf-btn" target="_blank">
+                            📄 View Brand Strategy
+                        </a>
+                        <span class="client-note">🏏 Co-founded by Bhuvneshwar Kumar & Mohit Sharma</span>
+                    </div>
+                </div>
+
+                <!-- CLIENT 5: LAB0.AI — full width -->
+                <div class="client-card" style="grid-column: 1 / -1; border-color: rgba(168,85,247,0.25); background: rgba(168,85,247,0.02);">
+                    <div style="display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 16px;">
+                            <div class="client-status status-pitching">
+                                <div class="status-dot"></div> In Discussion · GTM Pitching Stage
+                            </div>
+                            <div class="client-header">
+                                <div class="client-avatar" style="background: linear-gradient(135deg, #f3e8ff, #e9d5ff); color: #7e22ce;">OB</div>
+                                <div>
+                                    <div class="client-name">Onkar (Lab0.ai)</div>
+                                    <div class="client-role">Co-Founder — Lab0.ai</div>
+                                    <div class="client-company">IIT Bombay CSE Graduate · Y Combinator Entry · AI Infrastructure</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="flex: 2; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
+                            <div>
+                                <div class="client-work-tag">Current Pitch</div>
+                                <div class="client-work-title">GTM Strategy for Lab0.ai — Y Combinator-Backed AI Startup</div>
+                                <div class="client-work-desc">I discovered Lab0.ai's team posting on X about what they're building. I reached out proactively through comments, connected with Onkar — an IIT Bombay CSE graduate whose team has earned a Y Combinator entry. We're now in active discussion about building their GTM strategy. Approval pending. This is exactly the kind of high-potential early-stage AI startup I want to work with.</div>
+                            </div>
+                            <div class="client-deliverables">
+                                <span class="deliverable-pill">GTM Strategy</span>
+                                <span class="deliverable-pill">Market Entry</span>
+                                <span class="deliverable-pill">Growth Roadmap</span>
+                                <span class="deliverable-pill" style="background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); color: #a855f7;">Y Combinator Backed</span>
+                                <span class="deliverable-pill" style="background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); color: #a855f7;">IIT Bombay</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- BRAND COLLABORATIONS -->
         <section class="collabs-section">
