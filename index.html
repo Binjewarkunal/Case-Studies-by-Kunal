@@ -968,7 +968,45 @@
             .industries-grid { grid-template-columns: 1fr 1fr; }
         }
         /* ═══════════════════════════════════════
-           ANIMATED HERO BACKGROUND (PARTICLES)
+           DEAL PROGRESS TIMELINE
+        ═══════════════════════════════════════ */
+        .deal-timeline {
+            display: flex; flex-direction: column; gap: 0;
+            margin: 4px 0; position: relative;
+        }
+        .deal-timeline::before {
+            content: ''; position: absolute; left: 9px; top: 8px;
+            bottom: 8px; width: 1px; background: var(--border-color); z-index: 0;
+        }
+        .timeline-step {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 6px 0; position: relative; z-index: 1;
+        }
+        .tl-dot {
+            width: 19px; height: 19px; border-radius: 50%; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.6rem; font-weight: 900; margin-top: 1px;
+        }
+        .tl-dot.done { background: #22c55e; color: white; }
+        .tl-dot.active {
+            background: #fbbf24; color: #000;
+            box-shadow: 0 0 10px rgba(251,191,36,0.5);
+            animation: pulse-dot 1.5s infinite;
+        }
+        .tl-dot.pending {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+        .tl-content { flex: 1; }
+        .tl-label {
+            font-size: 0.78rem; font-weight: 700; color: var(--text-main);
+            line-height: 1.3;
+        }
+        .tl-label.muted { color: var(--text-muted); font-weight: 600; }
+        .tl-date {
+            font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;
+        }
+        .tl-date.highlight { color: #fbbf24; font-weight: 700; }
         ═══════════════════════════════════════ */
         #hero-canvas {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -1288,13 +1326,14 @@
                     </div>
                 </div>
 
-                <!-- CLIENT 4: ANTHLETE -->
-                <div class="client-card">
-                    <div class="client-status status-awaiting">
-                        <div class="status-dot"></div> Proposal Sent · Awaiting Response
+                <!-- CLIENT 4: ANTHLETE — WITH LIVE DEAL TIMELINE -->
+                <div class="client-card" style="border-color: rgba(251,191,36,0.3); box-shadow: 0 0 30px rgba(251,191,36,0.06);">
+                    <div class="client-status status-ongoing" style="background: rgba(251,191,36,0.1); color: #fbbf24; border-color: rgba(251,191,36,0.3);">
+                        <div class="status-dot" style="background: #fbbf24; box-shadow: 0 0 6px #fbbf24;"></div>
+                        Active Discussion · Founder Responded
                     </div>
                     <div class="client-header">
-                        <div class="client-avatar" style="background: linear-gradient(135deg, #fee2e2, #fecaca); color: #b91c1c;">RS</div>
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #fef9c3, #fde68a); color: #92400e;">RS</div>
                         <div>
                             <div class="client-name">Rahul Sharma</div>
                             <div class="client-role">Founder — Anthlete Nutritions</div>
@@ -1304,8 +1343,51 @@
                     <div>
                         <div class="client-work-tag">Self-Initiated Strategic Proposal</div>
                         <div class="client-work-title">Brand Growth & Market Strategy — Anthlete Nutritions</div>
-                        <div class="client-work-desc">I independently researched Anthlete Nutritions — a cricketer-backed, NFSU-NSTS certified nutrition brand co-founded by Bhuvneshwar Kumar and Mohit Sharma. I identified their core gap: strong credibility, near-zero visibility. I built a full brand strategy covering Trust-First positioning, GTM for Tier 2 & 3 India, market expansion beyond gym-goers to 500M+ active Indians, and a community-before-campaigns framework. Proactively sent to Founder Rahul — awaiting response.</div>
+                        <div class="client-work-desc">I independently researched Anthlete Nutritions — a cricketer-backed, NFSU-NSTS certified brand co-founded by Bhuvneshwar Kumar and Mohit Sharma. Identified their core gap: strong credibility, near-zero visibility. Built a full brand strategy covering Trust-First positioning, GTM for Tier 2 & 3 India, market expansion beyond gym-goers to 500M+ Indians, and a community-before-campaigns framework. Cold pitched to founder — and Rahul replied.</div>
                     </div>
+
+                    <!-- LIVE DEAL TIMELINE -->
+                    <div style="background: rgba(251,191,36,0.04); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 16px 18px;">
+                        <div style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #fbbf24; margin-bottom: 12px;">📍 Deal Progress</div>
+                        <div class="deal-timeline">
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Research & Strategy Built</div>
+                                    <div class="tl-date">Self-initiated · April 2026</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Cold Email Pitch Sent to Founder</div>
+                                    <div class="tl-date">Strategy PDF attached · April 2026</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Founder Rahul Replied ✉️</div>
+                                    <div class="tl-date">Email response received · Contact number shared</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot active">→</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Strategy v2 Submitted · In Discussion</div>
+                                    <div class="tl-date highlight">Currently active — awaiting next phase</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot pending">○</div>
+                                <div class="tl-content">
+                                    <div class="tl-label muted">Execution & Engagement</div>
+                                    <div class="tl-date">Next phase — pending confirmation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="client-deliverables">
                         <span class="deliverable-pill">Brand Positioning</span>
                         <span class="deliverable-pill">GTM Strategy</span>
@@ -1314,19 +1396,20 @@
                         <span class="deliverable-pill">Trust Architecture</span>
                     </div>
                     <div class="client-card-footer">
-                        <a href="Anthlete_Brand_Strategy.pdf" class="client-pdf-btn" target="_blank">
-                            📄 View Brand Strategy
+                        <a href="Anthlete_Strategy_v2.pdf" class="client-pdf-btn" target="_blank">
+                            📄 View Strategy v2
                         </a>
                         <span class="client-note">🏏 Co-founded by Bhuvneshwar Kumar & Mohit Sharma</span>
                     </div>
                 </div>
 
-                <!-- CLIENT 5: LAB0.AI — full width -->
-                <div class="client-card" style="grid-column: 1 / -1; border-color: rgba(168,85,247,0.25); background: rgba(168,85,247,0.02);">
+                <!-- CLIENT 5: LAB0.AI — full width, updated status -->
+                <div class="client-card" style="grid-column: 1 / -1; border-color: rgba(168,85,247,0.15); background: rgba(168,85,247,0.01);">
                     <div style="display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 16px;">
-                            <div class="client-status status-pitching">
-                                <div class="status-dot"></div> In Discussion · GTM Pitching Stage
+                            <div class="client-status" style="background: rgba(100,116,139,0.1); color: #94a3b8; border: 1px solid rgba(100,116,139,0.2);">
+                                <div class="status-dot" style="background: #94a3b8; box-shadow: none; animation: none;"></div>
+                                Connection Maintained · On Hold
                             </div>
                             <div class="client-header">
                                 <div class="client-avatar" style="background: linear-gradient(135deg, #f3e8ff, #e9d5ff); color: #7e22ce;">OB</div>
@@ -1339,9 +1422,9 @@
                         </div>
                         <div style="flex: 2; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
                             <div>
-                                <div class="client-work-tag">Current Pitch</div>
+                                <div class="client-work-tag">Pitched · On Hold</div>
                                 <div class="client-work-title">GTM Strategy for Lab0.ai — Y Combinator-Backed AI Startup</div>
-                                <div class="client-work-desc">I discovered Lab0.ai's team posting on X about what they're building. I reached out proactively through comments, connected with Onkar — an IIT Bombay CSE graduate whose team has earned a Y Combinator entry. We're now in active discussion about building their GTM strategy. Approval pending. This is exactly the kind of high-potential early-stage AI startup I want to work with.</div>
+                                <div class="client-work-desc">Discovered Lab0.ai's team on X, reached out proactively, and connected with Onkar — an IIT Bombay CSE graduate whose team earned a Y Combinator entry. Pitched GTM strategy collaboration. Currently on hold — Lab0.ai doesn't need GTM at this stage. Connection is maintained and relationship is warm for future engagement when the time is right.</div>
                             </div>
                             <div class="client-deliverables">
                                 <span class="deliverable-pill">GTM Strategy</span>
@@ -1349,6 +1432,7 @@
                                 <span class="deliverable-pill">Growth Roadmap</span>
                                 <span class="deliverable-pill" style="background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); color: #a855f7;">Y Combinator Backed</span>
                                 <span class="deliverable-pill" style="background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); color: #a855f7;">IIT Bombay</span>
+                                <span class="deliverable-pill" style="background: rgba(100,116,139,0.08); border-color: rgba(100,116,139,0.2); color: #94a3b8;">Relationship Active</span>
                             </div>
                         </div>
                     </div>
