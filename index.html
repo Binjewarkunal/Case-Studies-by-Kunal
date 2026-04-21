@@ -1007,11 +1007,6 @@
             font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;
         }
         .tl-date.highlight { color: #fbbf24; font-weight: 700; }
-        ═══════════════════════════════════════ */
-        #hero-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; opacity: 0.35; pointer-events: none;
-        }
 
         /* ═══════════════════════════════════════
            SCROLL FADE-IN ANIMATIONS
@@ -1158,7 +1153,6 @@
         </nav>
 
         <section class="hero">
-            <canvas id="hero-canvas"></canvas>
             <div class="hero-content">
                 <span class="badge">Independent Consultant</span>
                 <h1>Data Driven.<br>Strategy Focused.</h1>
@@ -2296,71 +2290,8 @@
         };
 
         // ══════════════════════════════════
-        // 1. ANIMATED HERO PARTICLES
         // ══════════════════════════════════
-        (function() {
-            const canvas = document.getElementById('hero-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let W, H, particles = [];
-            const COUNT = 55;
-
-            function resize() {
-                W = canvas.width = canvas.offsetWidth;
-                H = canvas.height = canvas.offsetHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-
-            function Particle() {
-                this.x = Math.random() * W;
-                this.y = Math.random() * H;
-                this.r = Math.random() * 1.5 + 0.4;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
-                this.alpha = Math.random() * 0.5 + 0.1;
-            }
-
-            for (let i = 0; i < COUNT; i++) particles.push(new Particle());
-
-            function draw() {
-                ctx.clearRect(0, 0, W, H);
-                const isDark = document.body.getAttribute('data-theme') !== 'light';
-                const color = isDark ? '99,160,255' : '37,99,235';
-
-                particles.forEach(p => {
-                    p.x += p.vx; p.y += p.vy;
-                    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-                    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(${color},${p.alpha})`;
-                    ctx.fill();
-                });
-
-                // Draw connecting lines between close particles
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx*dx + dy*dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(${color},${0.08 * (1 - dist/120)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.stroke();
-                        }
-                    }
-                }
-                requestAnimationFrame(draw);
-            }
-            draw();
-        })();
-
-        // ══════════════════════════════════
-        // 2. SCROLL FADE-IN ANIMATIONS
+        // SCROLL FADE-IN ANIMATIONS
         // ══════════════════════════════════
         const fadeEls = document.querySelectorAll(
             '.process-step, .industry-tile, .client-card, .collab-card, .case-card, .li-post-card, .analytics-panel, .featured-card, .analytics-stats-row'
