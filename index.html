@@ -1037,6 +1037,214 @@
         @media (max-width: 768px) { .nav-links { display: none; } }
 
         /* ═══════════════════════════════════════
+           TYPED ROTATING HEADLINE
+        ═══════════════════════════════════════ */
+        .typed-roles {
+            display: inline-block; color: var(--accent);
+            min-width: 280px; position: relative;
+            -webkit-text-fill-color: var(--accent);
+        }
+        .typed-cursor {
+            display: inline-block; width: 2px; height: 1em;
+            background: var(--accent); margin-left: 2px;
+            vertical-align: middle; animation: blink 0.8s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* ═══════════════════════════════════════
+           RESULTS NUMBER STRIP
+        ═══════════════════════════════════════ */
+        .results-strip {
+            padding: 60px 8%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--card-bg);
+        }
+        .results-grid {
+            display: grid; grid-template-columns: repeat(4,1fr);
+            gap: 0; text-align: center;
+        }
+        .result-item {
+            padding: 20px 10px; position: relative;
+        }
+        .result-item:not(:last-child)::after {
+            content: ''; position: absolute; right: 0; top: 20%; bottom: 20%;
+            width: 1px; background: var(--border-color);
+        }
+        .result-num {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900;
+            font-family: var(--font-display); color: var(--text-main);
+            letter-spacing: -1px; line-height: 1; margin-bottom: 8px;
+        }
+        .result-num span { color: var(--accent); }
+        .result-label {
+            font-size: 0.78rem; color: var(--text-muted); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;
+        }
+        @media (max-width: 768px) {
+            .results-grid { grid-template-columns: 1fr 1fr; gap: 0; }
+            .result-item:nth-child(2)::after { display: none; }
+            .result-item:nth-child(2) { border-right: none; }
+            .result-item:nth-child(1), .result-item:nth-child(2) {
+                border-bottom: 1px solid var(--border-color);
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           SERVICES SECTION
+        ═══════════════════════════════════════ */
+        .services-section {
+            padding: 100px 8%;
+            border-top: 1px solid var(--border-color);
+        }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 24px; margin-top: 50px;
+        }
+        .service-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 24px; padding: 36px 30px;
+            transition: all 0.35s ease; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; gap: 18px;
+        }
+        .service-card::before {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 3px; background: linear-gradient(90deg, var(--accent), #60a5fa);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.35s ease;
+        }
+        .service-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+        }
+        .service-title {
+            font-size: 1.2rem; font-weight: 800; font-family: var(--font-display);
+            color: var(--text-main); letter-spacing: -0.02em;
+        }
+        .service-desc {
+            font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; flex: 1;
+        }
+        .service-features {
+            display: flex; flex-direction: column; gap: 8px;
+            border-top: 1px solid var(--border-color); padding-top: 18px;
+        }
+        .service-feature {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.8rem; color: var(--text-muted);
+        }
+        .service-feature::before {
+            content: ''; width: 5px; height: 5px; border-radius: 50%;
+            background: var(--accent); flex-shrink: 0;
+        }
+        .service-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent); font-size: 0.82rem; font-weight: 700;
+            text-decoration: none; transition: gap 0.2s;
+            cursor: pointer; background: none; border: none; padding: 0;
+            font-family: var(--font-main);
+        }
+        .service-cta:hover { gap: 12px; }
+        @media (max-width: 768px) {
+            .services-section { padding: 60px 4%; }
+            .services-grid { grid-template-columns: 1fr; gap: 18px; }
+        }
+
+        /* ═══════════════════════════════════════
+           INQUIRY FORM SECTION
+        ═══════════════════════════════════════ */
+        .inquiry-section {
+            padding: 100px 8%;
+            border-top: 1px solid var(--border-color);
+        }
+        .inquiry-wrap {
+            display: grid; grid-template-columns: 1fr 1.4fr;
+            gap: 60px; align-items: start; margin-top: 50px;
+        }
+        .inquiry-left { display: flex; flex-direction: column; gap: 28px; }
+        .inquiry-left-title {
+            font-size: clamp(1.8rem, 3vw, 2.4rem); font-family: var(--font-display);
+            font-weight: 900; line-height: 1.15; color: var(--text-main);
+        }
+        .inquiry-left-title span { color: var(--accent); }
+        .inquiry-left p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+        .inquiry-contact-row {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .inquiry-contact-item {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 0.88rem; color: var(--text-muted);
+        }
+        .inquiry-contact-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+            display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .inquiry-contact-item a { color: var(--accent); text-decoration: none; font-weight: 700; }
+        /* Form */
+        .inquiry-form {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 24px; padding: 36px; display: flex; flex-direction: column; gap: 20px;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-label {
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-muted);
+        }
+        .form-input, .form-select, .form-textarea {
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 13px 16px; color: var(--text-main);
+            font-family: var(--font-main); font-size: 0.9rem;
+            transition: border-color 0.25s, box-shadow 0.25s; outline: none; width: 100%;
+        }
+        [data-theme="light"] .form-input,
+        [data-theme="light"] .form-select,
+        [data-theme="light"] .form-textarea {
+            background: #f8fafc;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
+        .form-select { cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center;
+        }
+        .form-select option { background: #1a1a2e; color: white; }
+        [data-theme="light"] .form-select option { background: #f8fafc; color: #0f172a; }
+        .form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+        .form-submit {
+            background: var(--accent); color: white; border: none;
+            padding: 15px 32px; border-radius: 50px; font-weight: 800;
+            font-size: 0.95rem; font-family: var(--font-main); cursor: pointer;
+            transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%;
+        }
+        .form-submit:hover { box-shadow: 0 10px 30px var(--accent-glow); transform: translateY(-2px); }
+        .form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .form-success {
+            display: none; text-align: center; padding: 30px;
+            color: #22c55e; font-weight: 700; font-size: 1rem;
+        }
+        .form-success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .form-note {
+            font-size: 0.72rem; color: var(--text-muted); text-align: center; line-height: 1.5;
+        }
+        @media (max-width: 1024px) {
+            .inquiry-wrap { grid-template-columns: 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            .inquiry-section { padding: 60px 4%; }
+            .form-row { grid-template-columns: 1fr; }
+            .inquiry-form { padding: 24px; }
+        }
+
+        /* ═══════════════════════════════════════
            BACK TO TOP BUTTON
         ═══════════════════════════════════════ */
         #back-to-top {
@@ -1138,10 +1346,10 @@
         <nav>
             <div class="logo">KUNAL BINJEWAR.</div>
             <div class="nav-links">
+                <a href="#services" class="nav-link">Services</a>
                 <a href="#work" class="nav-link">Work</a>
                 <a href="#clients" class="nav-link">Clients</a>
-                <a href="#reach" class="nav-link">Reach</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#inquiry" class="nav-link">Hire Me</a>
             </div>
             <div class="nav-actions">
                 <div class="availability-badge">
@@ -1155,7 +1363,7 @@
         <section class="hero">
             <div class="hero-content">
                 <span class="badge">Independent Consultant</span>
-                <h1>Data Driven.<br>Strategy Focused.</h1>
+                <h1>Data Driven.<br><span class="typed-roles" id="typed-roles"></span><span class="typed-cursor"></span></h1>
                 <p>I transform complex market signals into actionable business strategies. Specializing in Go-To-Market, competitor analysis, and narrative-driven growth.</p>
                 
                 <!-- ADDITION 5: SIGNATURE INSIGHT QUOTE -->
@@ -1211,6 +1419,83 @@
         <div class="metrics-strip">
             <div class="ticker-track" id="ticker"></div>
         </div>
+
+        <!-- RESULTS NUMBER STRIP -->
+        <div class="results-strip">
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-num">6<span>+</span></div>
+                    <div class="result-label">Clients Served<br>& Active</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-num">960<span>K+</span></div>
+                    <div class="result-label">Impressions<br>Last 28 Days</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-num">13</div>
+                    <div class="result-label">Strategic Case<br>Studies Published</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-num">2<span>+</span></div>
+                    <div class="result-label">Paid Brand<br>Collaborations</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICES SECTION -->
+        <section class="services-section" id="services">
+            <h2 class="section-title" style="text-align:center;">What I <span>Offer</span></h2>
+            <p style="text-align:center; color:var(--text-muted); max-width:520px; margin:0 auto; font-size:1rem;">Three core services. All built around one goal — helping you grow with clarity, strategy, and narrative that actually converts.</p>
+            <div class="services-grid">
+
+                <div class="service-card">
+                    <div class="service-icon">🗺️</div>
+                    <div class="service-title">GTM Strategy</div>
+                    <div class="service-desc">Full Go-To-Market roadmaps for early-stage startups and growing businesses. From market positioning to acquisition channels — I build the strategy that gets you from 0 to traction.</div>
+                    <div class="service-features">
+                        <div class="service-feature">Market & competitor analysis</div>
+                        <div class="service-feature">Positioning & ICP definition</div>
+                        <div class="service-feature">Channel strategy & action plan</div>
+                        <div class="service-feature">Pitch-ready growth framework</div>
+                    </div>
+                    <button class="service-cta" onclick="document.getElementById('inquiry').scrollIntoView({behavior:'smooth'})">
+                        Start a Project →
+                    </button>
+                </div>
+
+                <div class="service-card" style="border-color: rgba(59,130,246,0.3); box-shadow: 0 0 30px rgba(59,130,246,0.06);">
+                    <div style="position:absolute; top:20px; right:20px; background:var(--accent); color:white; font-size:0.65rem; font-weight:800; padding:4px 10px; border-radius:50px; letter-spacing:1px; text-transform:uppercase;">Most Popular</div>
+                    <div class="service-icon" style="background:rgba(59,130,246,0.12); border-color:rgba(59,130,246,0.25);">✍️</div>
+                    <div class="service-title">Executive Ghostwriting</div>
+                    <div class="service-desc">I write your LinkedIn content in your voice — not mine. For founders, consultants, and senior professionals who have insights but no time to write. Your ideas, my words, your audience.</div>
+                    <div class="service-features">
+                        <div class="service-feature">Voice calibration & tone matching</div>
+                        <div class="service-feature">Weekly content calendar</div>
+                        <div class="service-feature">High-engagement post formats</div>
+                        <div class="service-feature">Audience growth strategy</div>
+                    </div>
+                    <button class="service-cta" onclick="document.getElementById('inquiry').scrollIntoView({behavior:'smooth'})">
+                        Start a Project →
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <div class="service-title">Brand & Growth Consulting</div>
+                    <div class="service-desc">Strategic brand audits, growth frameworks, and narrative architecture for businesses that need to stand out. I identify the gap between where you are and where you should be — then build the bridge.</div>
+                    <div class="service-features">
+                        <div class="service-feature">Brand audit & gap analysis</div>
+                        <div class="service-feature">Messaging & positioning overhaul</div>
+                        <div class="service-feature">Growth roadmap & KPI framework</div>
+                        <div class="service-feature">Competitive differentiation strategy</div>
+                    </div>
+                    <button class="service-cta" onclick="document.getElementById('inquiry').scrollIntoView({behavior:'smooth'})">
+                        Start a Project →
+                    </button>
+                </div>
+
+            </div>
+        </section>
 
         <!-- CLIENT WORK -->
         <section class="client-work-section" id="clients">
@@ -1320,14 +1605,14 @@
                     </div>
                 </div>
 
-                <!-- CLIENT 4: ANTHLETE — WITH LIVE DEAL TIMELINE -->
-                <div class="client-card" style="border-color: rgba(251,191,36,0.3); box-shadow: 0 0 30px rgba(251,191,36,0.06);">
-                    <div class="client-status status-ongoing" style="background: rgba(251,191,36,0.1); color: #fbbf24; border-color: rgba(251,191,36,0.3);">
-                        <div class="status-dot" style="background: #fbbf24; box-shadow: 0 0 6px #fbbf24;"></div>
-                        Active Discussion · Founder Responded
+                <!-- CLIENT 4: ANTHLETE — EXECUTION PHASE -->
+                <div class="client-card" style="border-color: rgba(34,197,94,0.3); box-shadow: 0 0 30px rgba(34,197,94,0.06);">
+                    <div class="client-status status-ongoing" style="background: rgba(34,197,94,0.1); color: #22c55e; border-color: rgba(34,197,94,0.3);">
+                        <div class="status-dot" style="background: #22c55e; box-shadow: 0 0 6px #22c55e;"></div>
+                        Active · Charges Discussed · Building Execution Plan
                     </div>
                     <div class="client-header">
-                        <div class="client-avatar" style="background: linear-gradient(135deg, #fef9c3, #fde68a); color: #92400e;">RS</div>
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #15803d;">RS</div>
                         <div>
                             <div class="client-name">Rahul Sharma</div>
                             <div class="client-role">Founder — Anthlete Nutritions</div>
@@ -1335,14 +1620,14 @@
                         </div>
                     </div>
                     <div>
-                        <div class="client-work-tag">Self-Initiated Strategic Proposal</div>
+                        <div class="client-work-tag">Self-Initiated → Active Engagement</div>
                         <div class="client-work-title">Brand Growth & Market Strategy — Anthlete Nutritions</div>
-                        <div class="client-work-desc">I independently researched Anthlete Nutritions — a cricketer-backed, NFSU-NSTS certified brand co-founded by Bhuvneshwar Kumar and Mohit Sharma. Identified their core gap: strong credibility, near-zero visibility. Built a full brand strategy covering Trust-First positioning, GTM for Tier 2 & 3 India, market expansion beyond gym-goers to 500M+ Indians, and a community-before-campaigns framework. Cold pitched to founder — and Rahul replied.</div>
+                        <div class="client-work-desc">Started as a cold pitch — researched Anthlete independently, identified their core gap: strong credibility, near-zero visibility. Built full brand strategy, sent to founder. Rahul replied, shared contact number, liked the strategy v2. Charges and working model discussed. Now building the execution plan for deployment.</div>
                     </div>
 
                     <!-- LIVE DEAL TIMELINE -->
-                    <div style="background: rgba(251,191,36,0.04); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 16px 18px;">
-                        <div style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #fbbf24; margin-bottom: 12px;">📍 Deal Progress</div>
+                    <div style="background: rgba(34,197,94,0.04); border: 1px solid rgba(34,197,94,0.15); border-radius: 14px; padding: 16px 18px;">
+                        <div style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #22c55e; margin-bottom: 12px;">📍 Deal Progress</div>
                         <div class="deal-timeline">
                             <div class="timeline-step">
                                 <div class="tl-dot done">✓</div>
@@ -1362,21 +1647,28 @@
                                 <div class="tl-dot done">✓</div>
                                 <div class="tl-content">
                                     <div class="tl-label">Founder Rahul Replied ✉️</div>
-                                    <div class="tl-date">Email response received · Contact number shared</div>
+                                    <div class="tl-date">Email response · Contact number shared</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Strategy v2 Submitted · Founder Liked It</div>
+                                    <div class="tl-date">Charges & working model discussed</div>
                                 </div>
                             </div>
                             <div class="timeline-step">
                                 <div class="tl-dot active">→</div>
                                 <div class="tl-content">
-                                    <div class="tl-label">Strategy v2 Submitted · In Discussion</div>
-                                    <div class="tl-date highlight">Currently active — awaiting next phase</div>
+                                    <div class="tl-label">Building Execution Plan</div>
+                                    <div class="tl-date highlight">Currently active — execution roadmap in progress</div>
                                 </div>
                             </div>
                             <div class="timeline-step">
                                 <div class="tl-dot pending">○</div>
                                 <div class="tl-content">
-                                    <div class="tl-label muted">Execution & Engagement</div>
-                                    <div class="tl-date">Next phase — pending confirmation</div>
+                                    <div class="tl-label muted">Full Engagement Begins</div>
+                                    <div class="tl-date">Next phase — pending final confirmation</div>
                                 </div>
                             </div>
                         </div>
@@ -1388,6 +1680,7 @@
                         <span class="deliverable-pill">Tier 2 & 3 Market Entry</span>
                         <span class="deliverable-pill">Community Framework</span>
                         <span class="deliverable-pill">Trust Architecture</span>
+                        <span class="deliverable-pill" style="background:rgba(34,197,94,0.08); border-color:rgba(34,197,94,0.2); color:#22c55e;">Execution Plan — In Progress</span>
                     </div>
                     <div class="client-card-footer">
                         <a href="Anthlete_Strategy_v2.pdf" class="client-pdf-btn" target="_blank">
@@ -1397,7 +1690,85 @@
                     </div>
                 </div>
 
-                <!-- CLIENT 5: LAB0.AI — full width, updated status -->
+                <!-- CLIENT 5: SHILLS PROFESSIONAL -->
+                <div class="client-card">
+                    <div class="client-status status-awaiting">
+                        <div class="status-dot"></div>
+                        Strategy Delivered · Awaiting Response
+                    </div>
+                    <div class="client-header">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9d174d;">DK</div>
+                        <div>
+                            <div class="client-name">Darshan Kathiriya</div>
+                            <div class="client-role">New Product Developer — Shills Professional</div>
+                            <div class="client-company">Shills Professional · Mumbai · Beauty & Cosmetics · 4K LinkedIn Followers</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="client-work-tag">Inbound Approach · Strategy Delivered</div>
+                        <div class="client-work-title">Growth & GTM Strategy — Shills Professional</div>
+                        <div class="client-work-desc">Darshan approached via LinkedIn DM — New Product Developer at Shills Professional, a beauty brand on Nykaa, Myntra, Amazon & Flipkart across Nail, Makeup, Hair & Skin verticals. I analysed their brand, identified the core problem: real products, zero brand identity. Built a full GTM strategy covering 4 growth pillars — Creator Content Engine, LinkedIn B2B Activation, Website Modernisation, and Instagram Growth Strategy — plus a 90-day execution roadmap. Delivered as a live hosted strategy page.</div>
+                    </div>
+
+                    <!-- TIMELINE -->
+                    <div style="background: rgba(236,72,153,0.04); border: 1px solid rgba(236,72,153,0.12); border-radius: 14px; padding: 16px 18px;">
+                        <div style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #ec4899; margin-bottom: 12px;">📍 Deal Progress</div>
+                        <div class="deal-timeline">
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Darshan Approached via LinkedIn DM</div>
+                                    <div class="tl-date">Inbound enquiry · April 2026</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Problem Understood · Company Researched</div>
+                                    <div class="tl-date">Full brand audit completed</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot done">✓</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Full GTM Strategy Built & Delivered</div>
+                                    <div class="tl-date">Hosted as live strategy page on Vercel</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot active">→</div>
+                                <div class="tl-content">
+                                    <div class="tl-label">Waiting for Shills Team Response</div>
+                                    <div class="tl-date highlight">Currently active — awaiting next phase</div>
+                                </div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="tl-dot pending">○</div>
+                                <div class="tl-content">
+                                    <div class="tl-label muted">Execution Engagement</div>
+                                    <div class="tl-date">Next phase — pending confirmation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="client-deliverables">
+                        <span class="deliverable-pill">Brand Audit</span>
+                        <span class="deliverable-pill">GTM Strategy</span>
+                        <span class="deliverable-pill">Creator Content Engine</span>
+                        <span class="deliverable-pill">LinkedIn B2B Activation</span>
+                        <span class="deliverable-pill">Instagram Growth</span>
+                        <span class="deliverable-pill">90-Day Roadmap</span>
+                    </div>
+                    <div class="client-card-footer">
+                        <a href="https://shills-professional.vercel.app/" target="_blank" class="client-pdf-btn">
+                            🌐 View Live Strategy Page
+                        </a>
+                        <span class="client-note">💄 Beauty brand · Nykaa · Myntra · Amazon · Flipkart</span>
+                    </div>
+                </div>
+
+                <!-- CLIENT 6: LAB0.AI — full width -->
                 <div class="client-card" style="grid-column: 1 / -1; border-color: rgba(168,85,247,0.15); background: rgba(168,85,247,0.01);">
                     <div style="display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 16px;">
@@ -1961,6 +2332,98 @@
             </div>
         </section>
 
+        <!-- INQUIRY FORM -->
+        <section class="inquiry-section" id="inquiry">
+            <h2 class="section-title" style="text-align:center;">Work With <span>Me</span></h2>
+            <p style="text-align:center; color:var(--text-muted); max-width:520px; margin:0 auto; font-size:1rem;">Have a project in mind? Fill in a few details and I'll get back to you within 24 hours.</p>
+            <div class="inquiry-wrap">
+
+                <div class="inquiry-left">
+                    <div class="inquiry-left-title">Let's build something <span>remarkable</span> together.</div>
+                    <p>Whether you're an early-stage founder, a growing brand, or a senior professional — if you need strategy that actually gets executed, let's talk.</p>
+                    <div class="inquiry-contact-row">
+                        <div class="inquiry-contact-item">
+                            <div class="inquiry-contact-icon">✉️</div>
+                            <span>Email: <a href="mailto:binjewarkunal@gmail.com">binjewarkunal@gmail.com</a></span>
+                        </div>
+                        <div class="inquiry-contact-item">
+                            <div class="inquiry-contact-icon">💼</div>
+                            <span>LinkedIn: <a href="https://linkedin.com/in/kunalbinjewar" target="_blank">kunalbinjewar</a></span>
+                        </div>
+                        <div class="inquiry-contact-item">
+                            <div class="inquiry-contact-icon">📍</div>
+                            <span>Based in Pune, India · Available globally</span>
+                        </div>
+                        <div class="inquiry-contact-item">
+                            <div class="inquiry-contact-icon">⚡</div>
+                            <span>Response time: Within 24 hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inquiry-form" id="inquiry-form-wrap">
+                    <!-- SUCCESS STATE -->
+                    <div class="form-success" id="form-success">
+                        <div class="form-success-icon">🎉</div>
+                        <div>Message sent successfully!</div>
+                        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:8px; font-weight:400;">I'll get back to you within 24 hours at your email.</div>
+                    </div>
+
+                    <!-- FORM — replace YOUR_FORMSPREE_ID with your actual Formspree endpoint -->
+                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Your Name *</label>
+                                <input type="text" name="name" class="form-input" placeholder="Rahul Sharma" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Company / Startup</label>
+                                <input type="text" name="company" class="form-input" placeholder="Anthlete Nutritions">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Your Email *</label>
+                                <input type="email" name="email" class="form-input" placeholder="you@company.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Service Needed</label>
+                                <select name="service" class="form-select">
+                                    <option value="">Select a service</option>
+                                    <option value="GTM Strategy">GTM Strategy</option>
+                                    <option value="Executive Ghostwriting">Executive Ghostwriting</option>
+                                    <option value="Brand & Growth Consulting">Brand & Growth Consulting</option>
+                                    <option value="Other / Not Sure">Other / Not Sure</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Budget Range</label>
+                            <select name="budget" class="form-select">
+                                <option value="">Select a range</option>
+                                <option value="Under ₹10,000">Under ₹10,000</option>
+                                <option value="₹10,000 – ₹25,000">₹10,000 – ₹25,000</option>
+                                <option value="₹25,000 – ₹50,000">₹25,000 – ₹50,000</option>
+                                <option value="₹50,000 – ₹1,00,000">₹50,000 – ₹1,00,000</option>
+                                <option value="₹1,00,000+">₹1,00,000+</option>
+                                <option value="Let's discuss">Let's discuss</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Tell Me About Your Project *</label>
+                            <textarea name="message" class="form-textarea" placeholder="Briefly describe what you're working on, what challenge you're facing, and what you'd like my help with..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit" id="form-submit-btn">
+                            <span id="submit-text">Send Inquiry</span>
+                            <span id="submit-arrow">→</span>
+                        </button>
+                        <p class="form-note">No spam. No cold pitches back. Just a genuine response about how I can help.</p>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
         <!-- BACK TO TOP -->
         <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
             <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
@@ -2346,6 +2809,77 @@
                 setTimeout(() => toast.classList.remove('show'), 2500);
             }).catch(() => {
                 window.location.href = 'mailto:binjewarkunal@gmail.com';
+            });
+        }
+
+        // ══════════════════════════════════
+        // TYPED ROTATING HEADLINE
+        // ══════════════════════════════════
+        (function() {
+            const el = document.getElementById('typed-roles');
+            if (!el) return;
+            const roles = ['Strategy Focused.', 'GTM Architect.', 'Brand Builder.', 'Narrative Driven.', 'Growth Obsessed.'];
+            let roleIdx = 0, charIdx = 0, deleting = false;
+
+            function type() {
+                const current = roles[roleIdx];
+                if (!deleting) {
+                    el.textContent = current.substring(0, charIdx + 1);
+                    charIdx++;
+                    if (charIdx === current.length) {
+                        deleting = true;
+                        setTimeout(type, 1800);
+                        return;
+                    }
+                } else {
+                    el.textContent = current.substring(0, charIdx - 1);
+                    charIdx--;
+                    if (charIdx === 0) {
+                        deleting = false;
+                        roleIdx = (roleIdx + 1) % roles.length;
+                    }
+                }
+                setTimeout(type, deleting ? 55 : 85);
+            }
+            setTimeout(type, 600);
+        })();
+
+        // ══════════════════════════════════
+        // INQUIRY FORM SUBMISSION
+        // ══════════════════════════════════
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('form-submit-btn');
+                const btnText = document.getElementById('submit-text');
+                const btnArrow = document.getElementById('submit-arrow');
+
+                // Loading state
+                btn.disabled = true;
+                btnText.textContent = 'Sending...';
+                btnArrow.textContent = '⏳';
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        // Show success
+                        contactForm.style.display = 'none';
+                        document.getElementById('form-success').style.display = 'block';
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (err) {
+                    btnText.textContent = 'Something went wrong — email me directly';
+                    btnArrow.textContent = '✉️';
+                    btn.disabled = false;
+                    btn.onclick = () => window.location.href = 'mailto:binjewarkunal@gmail.com';
+                }
             });
         }
 
