@@ -117,8 +117,9 @@
         .avail-dot {
             width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
             box-shadow: 0 0 8px #22c55e;
-            animation: pulse-dot 2s infinite;
+            animation: pulse-dot 2s infinite; flex-shrink: 0;
         }
+        [data-theme="light"] .avail-dot { box-shadow: 0 0 8px #16a34a; background: #16a34a; }
         .avail-dot.busy { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; transform: scale(1); }
@@ -481,12 +482,13 @@
         .client-card.highlight-card::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
 
         /* ═══════════════════════════════════════
-           BRAND COLLABORATIONS
+           BRAND COLLABORATIONS — CAROUSEL
         ═══════════════════════════════════════ */
         .collabs-section {
             padding: 80px 8%;
             border-top: 1px solid var(--border-color);
             text-align: center;
+            overflow: hidden;
         }
         .collabs-label {
             display: inline-block; font-size: 0.75rem; font-weight: 800;
@@ -494,75 +496,88 @@
             border: 1px solid var(--border-color); padding: 6px 20px;
             border-radius: 50px; margin-bottom: 14px;
         }
-        .collabs-sub {
-            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 50px;
+        .collabs-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 40px; }
+        .collabs-carousel-wrap {
+            overflow-x: auto; margin: 0 -8%;
+            padding: 10px 8% 20px;
+            scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
-        .collabs-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 24px; text-align: left;
+        .collabs-carousel-wrap::-webkit-scrollbar { display: none; }
+        .collabs-track {
+            display: flex; gap: 20px; width: max-content;
         }
         .collab-card {
+            width: 280px; flex-shrink: 0;
             background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 20px; padding: 28px;
-            display: flex; flex-direction: column; gap: 20px;
-            transition: all 0.35s ease;
+            border-radius: 20px; padding: 24px;
+            display: flex; flex-direction: column; gap: 16px;
+            transition: all 0.3s ease; text-align: left;
         }
         .collab-card:hover {
-            border-color: var(--accent); transform: translateY(-6px);
+            border-color: var(--accent); transform: translateY(-5px);
             box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5);
         }
-        .collab-top { display: flex; gap: 16px; align-items: flex-start; }
+        .collab-card.collab-pitching {
+            border-style: dashed; border-color: rgba(59,130,246,0.3);
+            background: rgba(59,130,246,0.02); align-items: center;
+            justify-content: center; text-align: center;
+        }
+        .collab-card.collab-pitching:hover { border-style: solid; }
+        .collab-top { display: flex; gap: 12px; align-items: flex-start; }
         .collab-logo-wrap {
-            width: 60px; height: 60px; border-radius: 14px; flex-shrink: 0;
+            width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
             display: flex; flex-direction: column; align-items: center;
             justify-content: center; border: 1px solid var(--border-color);
         }
         .kt-logo { background: #e8f5ee; border-color: #b7dfc6; }
         .fc-logo { background: #eff6ff; border-color: #bfdbfe; }
-        .collab-brand-info { flex: 1; }
+        .collab-brand-info { flex: 1; min-width: 0; }
         .collab-brand-name {
-            font-weight: 800; font-size: 0.95rem; color: var(--text-main);
-            margin-bottom: 6px; font-family: var(--font-display);
+            font-weight: 800; font-size: 0.88rem; color: var(--text-main);
+            margin-bottom: 4px; font-family: var(--font-display);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .collab-brand-desc {
-            font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;
-        }
+        .collab-brand-desc { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
         .collab-what {
             background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.1);
-            border-radius: 12px; padding: 14px 16px;
+            border-radius: 10px; padding: 10px 12px; flex: 1;
         }
         .collab-what-label {
-            font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 1px; color: var(--accent); margin-bottom: 6px;
+            font-size: 0.62rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--accent); margin-bottom: 4px;
         }
-        .collab-what-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+        .collab-what-text { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
         .collab-post-link {
-            display: inline-flex; align-items: center; gap: 8px;
-            color: #0077b5; font-size: 0.82rem; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #0077b5; font-size: 0.75rem; font-weight: 700;
             text-decoration: none; border: 1px solid rgba(0,119,181,0.25);
-            padding: 8px 16px; border-radius: 50px;
+            padding: 6px 14px; border-radius: 50px;
             background: rgba(0,119,181,0.05);
-            transition: all 0.25s; width: fit-content;
+            transition: all 0.25s; width: fit-content; white-space: nowrap;
         }
-        .collab-post-link:hover {
-            background: rgba(0,119,181,0.12); border-color: #0077b5;
-            transform: translateY(-1px);
-        }
-        .collab-pitching {
-            border-style: dashed; border-color: rgba(59,130,246,0.25);
-            background: rgba(59,130,246,0.02);
-        }
-        .collab-pitching:hover { border-color: var(--accent); border-style: solid; }
+        .collab-post-link:hover { background: rgba(0,119,181,0.12); border-color: #0077b5; }
         .collab-pitching-inner {
             display: flex; flex-direction: column; align-items: center;
-            justify-content: center; text-align: center; height: 100%; gap: 14px;
+            gap: 10px;
         }
-        .collab-pitch-icon { font-size: 2rem; }
+        .collab-pitch-icon { font-size: 1.8rem; }
         .collab-pitch-title {
-            font-size: 1.2rem; font-weight: 800; font-family: var(--font-display);
+            font-size: 1rem; font-weight: 800; font-family: var(--font-display);
             color: var(--text-main);
         }
-        .collab-pitch-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+        .collab-pitch-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+        .collabs-scroll-hint {
+            display: none; text-align: center; font-size: 0.72rem;
+            color: var(--text-muted); margin-top: 12px; letter-spacing: 1px;
+        }
+        @media (max-width: 768px) {
+            .collabs-section { padding: 60px 0; }
+            .collabs-section > .collabs-label,
+            .collabs-section > .collabs-sub { margin-left: 5%; margin-right: 5%; }
+            .collabs-carousel-wrap { margin: 0; padding: 10px 5% 20px; }
+            .collabs-scroll-hint { display: block; }
+            .collab-card { width: 240px; padding: 18px; }
+        }
 
         /* ═══════════════════════════════════════
            SCROLL PROGRESS BAR
@@ -829,143 +844,154 @@
             .id-name { justify-content: center; }
             .featured-card { grid-template-columns: 1fr; }
             .featured-thumb { height: 240px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .client-cards-grid { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr 1fr; }
+            .inquiry-wrap { grid-template-columns: 1fr; gap: 40px; }
+            .footer-top { grid-template-columns: 1fr; text-align: center; }
+            .footer-contact { text-align: center; }
+            .footer-socials { justify-content: center; }
+            .footer-avail { justify-content: center; }
         }
 
         /* ═══════════════════════════════════════
            RESPONSIVE — MOBILE (max 768px)
         ═══════════════════════════════════════ */
         @media (max-width: 768px) {
-            /* Kill custom cursor */
+            /* Cursor */
             .cursor, .cursor-dot { display: none !important; }
             body { cursor: auto !important; }
 
-            /* Nav — compact, no overflow */
+            /* Nav */
             nav { padding: 0.9rem 5%; gap: 8px; }
-            .logo { font-size: 1.1rem; }
-            .availability-badge { padding: 6px 10px; }
-            .availability-badge span { display: none; }
-            .theme-btn { padding: 6px 12px; font-size: 0.75rem; }
+            .logo { font-size: 1.05rem; }
+            .theme-btn { padding: 6px 10px; font-size: 0.72rem; }
+            .availability-badge { display: none; }
 
             /* Hero */
-            .hero { padding: 100px 5% 50px; gap: 30px; }
-            .hero h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
-            .hero p { font-size: 1rem; }
-            .hero-quote blockquote { font-size: 0.92rem; }
-            .btn { padding: 12px 22px; font-size: 0.88rem; }
+            .hero { padding: 90px 5% 50px; gap: 24px; }
+            .hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+            .hero p { font-size: 0.95rem; }
+            .typed-roles { min-width: 0; }
+            .hero-quote blockquote { font-size: 0.88rem; }
+            .btn { padding: 12px 20px; font-size: 0.85rem; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; display: flex; }
 
-            /* Identity card — fix stats overflow */
-            .id-content { padding: 0 18px 22px; }
-            .id-profile-pic { width: 90px; height: 90px; margin-top: -45px; }
-            .id-name { font-size: 1.4rem; flex-wrap: wrap; }
-            .id-title { font-size: 0.85rem; }
-            .id-stats {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-                justify-items: start;
-            }
-            .stat-val { font-size: 1rem; }
-            .stat-label { font-size: 0.68rem; letter-spacing: 0.5px; }
+            /* Identity card */
+            .id-content { padding: 0 16px 20px; }
+            .id-profile-pic { width: 80px; height: 80px; margin-top: -40px; }
+            .id-name { font-size: 1.3rem; flex-wrap: wrap; justify-content: center; }
+            .id-title { font-size: 0.8rem; text-align: center; }
+            .id-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; justify-items: start; }
+            .stat-val { font-size: 0.95rem; }
+            .stat-label { font-size: 0.65rem; }
 
-            /* Work section */
+            /* Results strip */
+            .results-strip { padding: 40px 5%; }
+            .results-grid { grid-template-columns: 1fr 1fr; }
+            .result-item { padding: 16px 8px; }
+            .result-num { font-size: 1.6rem; }
+            .result-label { font-size: 0.7rem; }
+            .result-item:nth-child(2)::after { display: none; }
+            .result-item:nth-child(1),
+            .result-item:nth-child(2) { border-bottom: 1px solid var(--border-color); }
+
+            /* Sections padding */
             .work-section { padding: 50px 4%; }
-            .section-title { font-size: clamp(1.8rem, 8vw, 2.5rem); margin-bottom: 20px; }
+            .client-work-section { padding: 50px 4%; }
+            .services-section { padding: 50px 4%; }
+            .linkedin-section { padding: 50px 4%; }
+            .inquiry-section { padding: 50px 4%; }
 
-            /* Filter bar — scrollable on mobile */
+            /* Section titles */
+            .section-title { font-size: clamp(1.6rem, 7vw, 2.2rem); margin-bottom: 18px; }
+
+            /* Filter bar */
             .filter-bar {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding-bottom: 10px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                margin-bottom: 30px;
+                flex-wrap: nowrap; overflow-x: auto;
+                justify-content: flex-start; padding-bottom: 8px;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                margin-bottom: 24px;
             }
             .filter-bar::-webkit-scrollbar { display: none; }
-            .filter-btn { flex-shrink: 0; font-size: 0.75rem; padding: 7px 16px; }
+            .filter-btn { flex-shrink: 0; font-size: 0.72rem; padding: 6px 14px; }
 
-            /* Currently Analyzing card — stack on mobile */
+            /* Currently Analyzing card */
             .live-card[style*="grid"] {
-                display: flex !important;
-                flex-direction: column !important;
+                display: flex !important; flex-direction: column !important;
             }
-            .live-card[style*="grid"] .live-thumb {
-                min-height: 140px !important;
-                height: 140px !important;
-            }
-            .live-card[style*="grid"] .live-card-content {
-                padding: 20px !important;
-                gap: 16px !important;
-            }
-            .live-card-title { font-size: 1.2rem !important; }
+            .live-card[style*="grid"] .live-thumb { min-height: 130px !important; height: 130px !important; }
+            .live-card[style*="grid"] .live-card-content { padding: 18px !important; gap: 14px !important; flex-direction: column !important; }
+            .live-card-title { font-size: 1.1rem !important; }
 
             /* Featured card */
-            .featured-card { grid-template-columns: 1fr; margin-bottom: 30px; }
-            .featured-thumb { height: 200px; }
-            .featured-content { padding: 24px; }
-            .featured-title { font-size: 1.5rem; }
-            .featured-badge { font-size: 0.62rem; top: 14px; left: 14px; padding: 4px 10px; }
+            .featured-card { grid-template-columns: 1fr; margin-bottom: 24px; }
+            .featured-thumb { height: 180px; }
+            .featured-content { padding: 20px; }
+            .featured-title { font-size: 1.3rem; }
+            .featured-badge { font-size: 0.6rem; }
+            .insight-pill { font-size: 0.75rem; }
 
-            /* Case study grid — single column */
-            .grid { grid-template-columns: 1fr; gap: 24px; }
-            .card-thumb { height: 180px; }
-            .card-content { padding: 20px; }
-            .card-title { font-size: 1.2rem; }
-            .card-desc { font-size: 0.88rem; }
+            /* Case study grid */
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+            .card-thumb { height: 170px; }
+            .card-content { padding: 18px; }
+            .card-title { font-size: 1.1rem; }
+            .card-desc { font-size: 0.85rem; margin-bottom: 18px; }
 
-            /* Process section */
-            .process-section { padding: 60px 4%; }
-            .process-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-            .process-grid::before { display: none; }
+            /* Services */
+            .services-grid { grid-template-columns: 1fr; gap: 16px; }
+            .service-card { padding: 24px 20px; }
 
-            /* Industries */
-            .industries-section { padding: 60px 4%; }
-            .industries-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-            .industry-tile { padding: 22px 18px; }
-
-            /* Client work */
-            .client-work-section { padding: 60px 4%; }
-            .client-cards-grid { grid-template-columns: 1fr; gap: 20px; }
-            .client-card { padding: 24px; }
-
-            /* Collabs */
-            .collabs-section { padding: 60px 4%; }
-            .collabs-grid { grid-template-columns: 1fr; gap: 18px; }
+            /* Client cards */
+            .client-cards-grid { grid-template-columns: 1fr; gap: 16px; }
+            .client-card { padding: 20px; }
+            .client-card[style*="grid-column"] { grid-column: 1 !important; }
+            .client-card[style*="grid-column"] > div { flex-direction: column !important; gap: 16px !important; }
+            .deal-timeline::before { left: 9px; }
 
             /* Analytics panel */
-            .analytics-panel { padding: 22px; }
-            .analytics-stats-row { grid-template-columns: 1fr; gap: 16px; }
-            .analytics-stat-val { font-size: 1.6rem; }
+            .analytics-panel { padding: 20px; }
+            .analytics-stats-row { grid-template-columns: 1fr; gap: 14px; }
+            .analytics-stat-val { font-size: 1.5rem; }
             .chart-x-labels { display: none; }
-            .analytics-chart-wrap { height: 160px; }
+            .analytics-chart-wrap { height: 150px; }
 
             /* LinkedIn strip */
-            .linkedin-section { padding: 60px 4%; }
-            .li-post-card { width: 260px; padding: 22px; }
+            .li-post-card { width: 250px; padding: 20px; }
+
+            /* Inquiry form */
+            .inquiry-form { padding: 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .inquiry-left-title { font-size: 1.5rem; }
 
             /* Footer */
             footer { padding: 40px 5%; }
+            .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+            .footer-bottom-links { justify-content: center; }
         }
 
         /* ═══════════════════════════════════════
-           RESPONSIVE — TINY (max 400px, e.g. Narzo 10A)
+           RESPONSIVE — TINY (max 400px)
         ═══════════════════════════════════════ */
         @media (max-width: 400px) {
             nav { padding: 0.8rem 4%; }
-            .logo { font-size: 1rem; }
-            .hero { padding: 90px 4% 40px; }
-            .hero h1 { font-size: 2rem; }
-            .id-name { font-size: 1.2rem; }
+            .logo { font-size: 0.95rem; }
+            .hero { padding: 80px 4% 40px; }
+            .hero h1 { font-size: 1.9rem; }
+            .id-name { font-size: 1.1rem; }
             .id-stats { gap: 10px; }
-            .stat-val { font-size: 0.95rem; }
-            .stat-label { font-size: 0.62rem; }
+            .stat-val { font-size: 0.9rem; }
+            .stat-label { font-size: 0.6rem; }
             .work-section { padding: 40px 4%; }
-            .featured-title { font-size: 1.3rem; }
-            .card-title { font-size: 1.1rem; }
-            .btn-group { flex-direction: column; width: 100%; }
-            .btn { width: 100%; justify-content: center; }
-            .process-grid { grid-template-columns: 1fr; }
-            .industries-grid { grid-template-columns: 1fr 1fr; }
+            .services-section { padding: 40px 4%; }
+            .client-work-section { padding: 40px 4%; }
+            .inquiry-section { padding: 40px 4%; }
+            .featured-title { font-size: 1.2rem; }
+            .card-title { font-size: 1rem; }
+            .result-num { font-size: 1.4rem; }
+            .section-title { font-size: 1.5rem; }
         }
         /* ═══════════════════════════════════════
            DEAL PROGRESS TIMELINE
@@ -1863,8 +1889,9 @@
         <!-- BRAND COLLABORATIONS -->
         <section class="collabs-section">
             <div class="collabs-label">Paid Brand Collaborations</div>
-            <p class="collabs-sub">Actively pitching & partnering with brands that align with my audience's interests.</p>
-            <div class="collabs-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <p class="collabs-sub">Actively partnering with brands that align with my audience's interests. Swipe to explore →</p>
+            <div class="collabs-carousel-wrap">
+                <div class="collabs-track">
 
                 <div class="collab-card">
                     <div class="collab-top">
@@ -1978,91 +2005,9 @@
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- HOW I WORK PROCESS SECTION -->
-        <section class="process-section">
-            <h2 class="section-title" style="text-align:center;">How I <span>Work</span></h2>
-            <p style="text-align:center; color:var(--text-muted); max-width:520px; margin:0 auto; font-size:1rem;">From raw market noise to a narrative that moves people — here's my 4-step consulting process.</p>
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-icon">
-                        🔍
-                        <div class="step-num">1</div>
-                    </div>
-                    <div class="step-title">Research</div>
-                    <p class="step-desc">Deep-dive into primary data, market signals, earnings calls, and competitor moves. No assumptions — only evidence.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-icon">
-                        🧠
-                        <div class="step-num">2</div>
-                    </div>
-                    <div class="step-title">Analysis</div>
-                    <p class="step-desc">Pattern recognition across industries. I connect dots that siloed analysts miss — unit economics, behavioral data, macro triggers.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-icon">
-                        🗺️
-                        <div class="step-num">3</div>
-                    </div>
-                    <div class="step-title">Framework</div>
-                    <p class="step-desc">Every insight gets structured into a repeatable model — GTM maps, competitive matrices, risk-adjusted growth frameworks.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-icon">
-                        ✍️
-                        <div class="step-num">4</div>
-                    </div>
-                    <div class="step-title">Narrative</div>
-                    <p class="step-desc">Strategy without story is just a spreadsheet. I craft the narrative that makes decision-makers act — not just nod.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- INDUSTRIES I COVER -->
-        <section class="industries-section">
-            <h2 class="section-title" style="text-align:center;">Industries I <span>Cover</span></h2>
-            <p style="text-align:center; color:var(--text-muted); max-width:520px; margin:0 auto; font-size:1rem;">Click any industry to filter case studies instantly.</p>
-            <div class="industries-grid">
-                <div class="industry-tile" data-industry-filter="FinTech / Disruption">
-                    <div class="industry-icon">💳</div>
-                    <div class="industry-name">FinTech</div>
-                    <div class="industry-count">2 case studies</div>
-                    <div class="industry-tag-badge">Disruption</div>
-                </div>
-                <div class="industry-tile" data-industry-filter="GTM Strategy / EdTech">
-                    <div class="industry-icon">🎓</div>
-                    <div class="industry-name">EdTech</div>
-                    <div class="industry-count">1 case study</div>
-                    <div class="industry-tag-badge">GTM Strategy</div>
-                </div>
-                <div class="industry-tile" data-industry-filter="Product Audit / Q-Commerce">
-                    <div class="industry-icon">⚡</div>
-                    <div class="industry-name">Q-Commerce</div>
-                    <div class="industry-count">1 case study</div>
-                    <div class="industry-tag-badge">Product Audit</div>
-                </div>
-                <div class="industry-tile" data-industry-filter="Trending / Geopolitics">
-                    <div class="industry-icon">🌏</div>
-                    <div class="industry-name">Geopolitics</div>
-                    <div class="industry-count">2 case studies</div>
-                    <div class="industry-tag-badge">Global Strategy</div>
-                </div>
-                <div class="industry-tile" data-industry-filter="Psychology / Economics">
-                    <div class="industry-icon">🛒</div>
-                    <div class="industry-name">FMCG</div>
-                    <div class="industry-count">1 case study</div>
-                    <div class="industry-tag-badge">Consumer Behavior</div>
-                </div>
-                <div class="industry-tile" data-industry-filter="HR Analytics / ROI">
-                    <div class="industry-icon">🏆</div>
-                    <div class="industry-name">HR & Talent</div>
-                    <div class="industry-count">1 case study</div>
-                    <div class="industry-tag-badge">Analytics & ROI</div>
-                </div>
-            </div>
+                </div><!-- end collabs-track -->
+            </div><!-- end collabs-carousel-wrap -->
+            <p class="collabs-scroll-hint">← Swipe to see all collabs →</p>
         </section>
 
         <section id="work" class="work-section">
