@@ -6,7 +6,7 @@
     <title>Kunal Binjewar | Strategy Consultant & Business Analyst</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Kunal Binjewar — Growth Strategy Consultant & Executive Ghostwriter. Go-To-Market, Competitor Analysis & Narrative-driven Growth for B2B Tech. 4.5M+ Impressions, 20K+ Followers.">
+    <meta name="description" content="Kunal Binjewar — GTM & Brand Strategist. Helping Startups & Brands Go-to-Market. 5M+ Impressions, 21K+ Followers, 6+ Clients.">
     <meta name="keywords" content="Kunal Binjewar, Strategy Consultant, GTM Strategy, Business Analyst, Go-To-Market, LinkedIn Ghostwriter, B2B Growth, India">
     <meta name="author" content="Kunal Binjewar">
 
@@ -1009,7 +1009,43 @@
         .tl-date.highlight { color: #fbbf24; font-weight: 700; }
 
         /* ═══════════════════════════════════════
-           SCROLL FADE-IN ANIMATIONS
+           MOBILE HAMBURGER MENU
+        ═══════════════════════════════════════ */
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center;
+            gap: 5px; cursor: pointer; padding: 8px;
+            background: none; border: none; z-index: 200;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px;
+            background: var(--text-main); border-radius: 2px;
+            transition: all 0.3s ease; transform-origin: center;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--bg-color); z-index: 150; flex-direction: column;
+            align-items: center; justify-content: center; gap: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-size: 1.8rem; font-weight: 900; font-family: var(--font-display);
+            color: var(--text-main); text-decoration: none; letter-spacing: -0.02em;
+            transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--accent); }
+        .mobile-menu-avail {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.85rem; font-weight: 700; color: #22c55e; margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none !important; }
+            .availability-badge { display: none; }
+        }
         ═══════════════════════════════════════ */
         .fade-up {
             opacity: 0; transform: translateY(40px);
@@ -1357,19 +1393,34 @@
                     <span id="avail-text">Open to Projects</span>
                 </div>
                 <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
+                <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </nav>
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#services" onclick="toggleMenu()">Services</a>
+            <a href="#work" onclick="toggleMenu()">Work</a>
+            <a href="#clients" onclick="toggleMenu()">Clients</a>
+            <a href="#reach" onclick="toggleMenu()">Reach</a>
+            <a href="#inquiry" onclick="toggleMenu()">Hire Me</a>
+            <div class="mobile-menu-avail">
+                <div class="avail-dot"></div> Open to Projects
+            </div>
+        </div>
 
         <section class="hero">
             <div class="hero-content">
                 <span class="badge">Independent Consultant</span>
                 <h1>Data Driven.<br><span class="typed-roles" id="typed-roles"></span><span class="typed-cursor"></span></h1>
-                <p>I transform complex market signals into actionable business strategies. Specializing in Go-To-Market, competitor analysis, and narrative-driven growth.</p>
+                <p>I help startups and brands go-to-market with clarity. GTM strategy, brand positioning, and content that builds real pipeline — not just impressions.</p>
                 
                 <!-- ADDITION 5: SIGNATURE INSIGHT QUOTE -->
                 <div class="hero-quote">
                     <blockquote>"Most companies don't fail from bad strategy — they fail from executing the wrong strategy with confidence."</blockquote>
-                    <cite>— Kunal Binjewar, Oracle Mass Layoffs Analysis</cite>
+                    <cite>— Kunal Binjewar · Growth & GTM Strategist</cite>
                 </div>
 
                 <div class="btn-group">
@@ -1391,14 +1442,14 @@
                             Kunal Binjewar
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         </div>
-                        <div class="id-title">Growth Strategy Consultant & Executive Ghostwriter | Go-To-Market, Content Strategy & Inbound Pipelines for B2B Tech.</div>
+                        <div class="id-title">GTM & Brand Strategy | Helping Startups & Brands Go-to-Market | Open to Full-Time Growth / Strategy Roles</div>
                         <div class="id-stats">
                             <div class="stat-item">
-                                <span class="stat-val">4.5M+</span>
+                                <span class="stat-val">5M+</span>
                                 <span class="stat-label">Impressions</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-val">20K+</span>
+                                <span class="stat-val">21K+</span>
                                 <span class="stat-label">Followers</span>
                             </div>
                             <div class="stat-item">
@@ -1686,6 +1737,9 @@
                         <a href="Anthlete_Strategy_v2.pdf" class="client-pdf-btn" target="_blank">
                             📄 View Strategy v2
                         </a>
+                        <a href="https://an-growth-strategy.vercel.app/" class="client-pdf-btn" target="_blank">
+                            🌐 View Execution Strategy
+                        </a>
                         <span class="client-note">🏏 Co-founded by Bhuvneshwar Kumar & Mohit Sharma</span>
                     </div>
                 </div>
@@ -1810,7 +1864,7 @@
         <section class="collabs-section">
             <div class="collabs-label">Paid Brand Collaborations</div>
             <p class="collabs-sub">Actively pitching & partnering with brands that align with my audience's interests.</p>
-            <div class="collabs-grid">
+            <div class="collabs-grid" style="grid-template-columns: repeat(3, 1fr);">
 
                 <div class="collab-card">
                     <div class="collab-top">
@@ -1853,7 +1907,66 @@
                     </a>
                 </div>
 
-                <!-- PITCHING CARD -->
+                <div class="collab-card">
+                    <div class="collab-top">
+                        <div class="collab-logo-wrap" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-color: #6ee7b7;">
+                            <span style="font-size:0.85rem; font-weight:900; color:#065f46; letter-spacing:-0.5px; line-height:1.1; text-align:center;">Go<br>Zero</span>
+                        </div>
+                        <div class="collab-brand-info">
+                            <div class="collab-brand-name">Go Zero</div>
+                            <div class="collab-brand-desc">₹100 Cr+ ice cream brand solving the health-taste dilemma. Low calorie, high protein — built for Gen Z's health-first generation.</div>
+                        </div>
+                    </div>
+                    <div class="collab-what">
+                        <div class="collab-what-label">What I did</div>
+                        <div class="collab-what-text">Paid LinkedIn collaboration — audience education on why Go Zero is the go-to ice cream brand for health-conscious India. Brand story + product positioning.</div>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/kunalbinjewar_he-built-a-100-cr-ice-cream-brand-by-solving-activity-7453342120200888321-OBYH" target="_blank" class="collab-post-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        View Collab Post
+                    </a>
+                </div>
+
+                <div class="collab-card">
+                    <div class="collab-top">
+                        <div class="collab-logo-wrap" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #fbbf24;">
+                            <span style="font-size:0.75rem; font-weight:900; color:#92400e; letter-spacing:-0.5px; line-height:1.1; text-align:center;">Angel<br>One</span>
+                        </div>
+                        <div class="collab-brand-info">
+                            <div class="collab-brand-name">Angel One · Cricket Park</div>
+                            <div class="collab-brand-desc">Leading Indian fintech & stock broking platform. Cricket Park — a nostalgia-driven cricket experience event where busy professionals relive their passion.</div>
+                        </div>
+                    </div>
+                    <div class="collab-what">
+                        <div class="collab-what-label">What I did</div>
+                        <div class="collab-what-text">Paid LinkedIn collaboration — promoted Cricket Park event highlighting the nostalgia angle, connecting cricket passion with Angel One's fintech platform audience.</div>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/kunalbinjewar_cricketparkbyangelone-activity-7454447438498590720-HYbR" target="_blank" class="collab-post-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        View Collab Post
+                    </a>
+                </div>
+
+                <div class="collab-card">
+                    <div class="collab-top">
+                        <div class="collab-logo-wrap" style="background: linear-gradient(135deg, #ede9fe, #ddd6fe); border-color: #a78bfa;">
+                            <span style="font-size:0.75rem; font-weight:900; color:#5b21b6; letter-spacing:-0.5px; line-height:1.1; text-align:center;">Story<br>TV</span>
+                        </div>
+                        <div class="collab-brand-info">
+                            <div class="collab-brand-name">Story TV</div>
+                            <div class="collab-brand-desc">India's most downloaded short drama app. Pioneering the horizontal-to-vertical content shift — micro dramas built for how audiences actually consume content today.</div>
+                        </div>
+                    </div>
+                    <div class="collab-what">
+                        <div class="collab-what-label">What I did</div>
+                        <div class="collab-what-text">Paid LinkedIn collaboration — highlighting Story TV's growth, the vertical content revolution, and why micro-drama is India's next big entertainment format.</div>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/kunalbinjewar_storytv-indianapps-digitalmedia-activity-7454485091969568769-ZiV5" target="_blank" class="collab-post-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        View Collab Post
+                    </a>
+                </div>
+
                 <div class="collab-card collab-pitching">
                     <div class="collab-pitching-inner">
                         <div class="collab-pitch-icon">📨</div>
@@ -2191,7 +2304,7 @@
                         <div class="analytics-growth" style="color: var(--text-muted);">Unique accounts · same period</div>
                     </div>
                     <div class="analytics-stat-block">
-                        <div class="analytics-stat-val">4.5M+</div>
+                        <div class="analytics-stat-val">5M+</div>
                         <div class="analytics-stat-label">Total All-Time Impressions</div>
                         <div class="analytics-growth" style="color: var(--text-muted);">Cumulative · all posts</div>
                     </div>
@@ -2437,7 +2550,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <div class="footer-logo">KUNAL BINJEWAR.</div>
-                    <p>Growth Strategy Consultant & Executive Ghostwriter for B2B Tech founders and professionals.</p>
+                    <p>GTM & Brand Strategy · Helping Startups & Brands Go-to-Market · Open to Full-Time Growth / Strategy Roles.</p>
                     <div class="footer-avail">
                         <div class="avail-dot"></div>
                         Open to Projects
@@ -2599,8 +2712,8 @@
         // ADDITION 2: TICKER STRIP
         // ══════════════════════════════════
         const tickerItems = [
-            { val: '4.5M+', lbl: 'Impressions' },
-            { val: '20K+', lbl: 'Followers' },
+            { val: '5M+', lbl: 'Impressions' },
+            { val: '21K+', lbl: 'Followers' },
             { val: '13', lbl: 'Case Studies' },
             { val: '6', lbl: 'Industries Covered' },
             { val: '₹0', lbl: 'Marketing Spend (Organic)' },
@@ -2734,8 +2847,8 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
                     if (e.isIntersecting) {
-                        animateCounter('imp-counter', 960132, 2000);
-                        animateCounter('reach-counter', 548838, 2000);
+                        animateCounter('imp-counter', 1000000, 2000);
+                        animateCounter('reach-counter', 571321, 2000);
                         observer.disconnect();
                     }
                 });
@@ -2811,6 +2924,22 @@
                 window.location.href = 'mailto:binjewarkunal@gmail.com';
             });
         }
+
+        // ══════════════════════════════════
+        // MOBILE HAMBURGER MENU
+        // ══════════════════════════════════
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.getElementById('mobile-menu');
+            hamburger.classList.toggle('open');
+            menu.classList.toggle('open');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        // Close menu on outside click
+        document.getElementById('mobile-menu').addEventListener('click', function(e) {
+            if (e.target === this) toggleMenu();
+        });
 
         // ══════════════════════════════════
         // TYPED ROTATING HEADLINE
